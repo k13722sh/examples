@@ -293,7 +293,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "InfoCell") as! InfoCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: "ScoreCell") as! InfoCell
     guard let section = InferenceSections(rawValue: indexPath.section) else {
       return cell
     }
