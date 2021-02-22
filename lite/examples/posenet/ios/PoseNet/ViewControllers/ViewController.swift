@@ -17,7 +17,7 @@ import UIKit
 import os
 
 class ViewController: UIViewController {
-  // MARK: Storyboards Connections
+    // MARK: Storyboards Connections
   @IBOutlet weak var previewView: PreviewView!
 
   @IBOutlet weak var overlayView: OverlayView!
@@ -240,6 +240,7 @@ extension ViewController: CameraFeedManagerDelegate {
       previewViewFrame.size.transformKeepAspect(toFitIn: pixelBuffer.size))
 
     // Run PoseNet model.
+    // MARK: Model Run Here?
     guard
       let (result, times) = self.modelDataHandler?.runPoseNet(
         on: pixelBuffer,
@@ -359,7 +360,7 @@ fileprivate enum InferenceSections: Int, CaseIterable {
   var description: String {
     switch self {
     case .Score:
-      return "Score"
+      return "Angle"
     case .Time:
       return "Processing Time"
     }
