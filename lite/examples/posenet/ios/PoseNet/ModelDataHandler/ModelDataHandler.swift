@@ -278,12 +278,28 @@ class ModelDataHandler {
     
     // MARK: Method stub to return an angle (My Code)
     // Returns an angle of 45 degrees
-    var rElbow : CGPoint = result.dots[8]
-    // rShoulder
-    // rWrist
-    print(angle)
-    angle = 45.0
-    print(angle)
+    rElbow = result.dots[8]
+    rShoulder = result.dots[6]
+    rWrist = result.dots[10]
+    
+    //print(rElbow, rShoulder, rWrist)
+    
+    // Calculate the length from shoulder to elbow using pythagoras
+    dy = rShoulder.y - rElbow.y
+    dx = rShoulder.x - rElbow.x
+    //cSqrd = aSqrd + bSqrd
+    //hypotenuse = cSqrd.squareRoot()
+    angleTangent = dy / dx
+    angle = atan(angleTangent) * (180 / .pi)
+    
+    if printOut == 1 {
+        print(rElbow.x, rElbow.y, rShoulder.x, rShoulder.y)
+        print(dy, dx)
+        print(angleTangent)
+        print(angle)
+        printOut = 0
+    }
+    
 
     return result
   }
@@ -307,7 +323,7 @@ class ModelDataHandler {
       os_log(
         "Failed to invoke the interpreter with error: %s", type: .error,
         error.localizedDescription)
-      return
+      return 
     }
   }
 
@@ -317,8 +333,17 @@ class ModelDataHandler {
   }
 }
 
-// MARK: My Own Data Types
-var angle: Float = 0.0
+// MARK: My Variables
+var angle: CGFloat = 0.0
+var angleTangent: CGFloat = 0.0
+var dy: CGFloat = 0.0
+var dx: CGFloat = 0.0
+var cSqrd: CGFloat = 0.0
+var hypotenuse: CGFloat = 0.0
+var rElbow: CGPoint = CGPoint.init()
+var rShoulder: CGPoint = CGPoint.init()
+var rWrist: CGPoint = CGPoint.init()
+var printOut: Int = 1
 
 // MARK: - Data types for inference result
 struct KeyPoint {

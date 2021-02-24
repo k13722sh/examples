@@ -305,7 +305,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     switch section {
     case .Score:
       fieldName = section.description
-      info = String(format: "%.3f", data.score)
+        info = String(format: "%.3f", angle) // data.score vs angle
     case .Time:
       guard let row = ProcessingTimes(rawValue: indexPath.row) else {
         return cell
