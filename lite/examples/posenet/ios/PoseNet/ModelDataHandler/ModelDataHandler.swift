@@ -112,6 +112,7 @@ class ModelDataHandler {
 
   }
 
+  // MARK: Main Function
   /// Runs PoseNet model with given image with given source area to destination area.
   ///
   /// - Parameters:
@@ -275,8 +276,11 @@ class ModelDataHandler {
       return nil
     }
     
-    // MARK: Method stub to return an angle
+    // MARK: Method stub to return an angle (My Code)
     // Returns an angle of 45 degrees
+    var rElbow : CGPoint = result.dots[8]
+    // rShoulder
+    // rWrist
     print(angle)
     angle = 45.0
     print(angle)
