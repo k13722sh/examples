@@ -274,6 +274,12 @@ class ModelDataHandler {
       os_log("Postprocessing error: %s", type: .error, error.localizedDescription)
       return nil
     }
+    
+    // MARK: Method stub to return an angle
+    // Returns an angle of 45 degrees
+    print(angle)
+    angle = 45.0
+    print(angle)
 
     return result
   }
@@ -306,6 +312,9 @@ class ModelDataHandler {
     return (1.0 / (1.0 + exp(-x)))
   }
 }
+
+// MARK: My Own Data Types
+var angle: Float = 0.0
 
 // MARK: - Data types for inference result
 struct KeyPoint {
