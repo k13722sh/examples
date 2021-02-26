@@ -287,17 +287,26 @@ class ModelDataHandler {
     // Calculate the length from shoulder to elbow using pythagoras
     dy = rShoulder.y - rElbow.y
     dx = rShoulder.x - rElbow.x
-    //cSqrd = aSqrd + bSqrd
-    //hypotenuse = cSqrd.squareRoot()
-    angleTangent = dy / dx
-    angle = atan(angleTangent) * (180 / .pi)
+    
+    // If dy is -ve then the arm is pointing down to the right else it is up to the right and 90 dgerees needs to be added on to the final answer
+    if (dy < 0) {
+        angleTangent = dx / dy
+        angle = atan(abs(angleTangent)) * (180 / .pi)
+    } else {
+        angleTangent = dy / dx
+        angle = atan(abs(angleTangent)) * (180 / .pi) + 90
+    }
     
     if printOut == 1 {
         print(rElbow.x, rElbow.y, rShoulder.x, rShoulder.y)
         print(dy, dx)
         print(angleTangent)
         print(angle)
-        printOut = 0
+        printOut = 0 /*
+        for n in 0...16 {
+            print(result.dots[n])
+            printOut = 0
+        } */
     }
     
 
