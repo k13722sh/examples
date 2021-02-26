@@ -154,6 +154,11 @@ class ViewController: UIViewController {
       }
     }
   }
+    
+  @IBAction func didTapVideoButton() {
+    let vc = VideoViewController()
+    present(vc, animated:true)
+  }
 
   func presentUnableToResumeSessionAlert() {
     let alert = UIAlertController(

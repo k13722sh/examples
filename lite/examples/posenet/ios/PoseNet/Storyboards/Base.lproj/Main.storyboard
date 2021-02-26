@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -56,8 +57,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nFg-A5-Dew" userLabel="BottomView">
                                         <rect key="frame" x="0.0" y="533" width="414" height="363"/>
                                         <subviews>
-                                            <tableView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3e4-S8-Ouh">
-                                                <rect key="frame" x="60" y="30" width="294" height="163"/>
+                                            <tableView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" bounces="NO" scrollEnabled="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3e4-S8-Ouh">
+                                                <rect key="frame" x="60" y="30" width="304" height="82"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -66,10 +67,10 @@
                                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ScoreCell" rowHeight="45" id="THr-Uf-ggb" customClass="InfoCell" customModule="PoseNet" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="294" height="45"/>
+                                                        <rect key="frame" x="0.0" y="28" width="304" height="45"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="THr-Uf-ggb" id="5T1-ZQ-m0o">
-                                                            <rect key="frame" x="0.0" y="0.0" width="294" height="45"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="304" height="45"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Field Label" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mTG-UQ-Lwc" userLabel="Field Name Label">
@@ -111,10 +112,10 @@
                                                         </connections>
                                                     </tableViewCell>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AngleCell" rowHeight="45" id="mKE-FW-2LU" customClass="InfoCell" customModule="PoseNet" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="73" width="294" height="45"/>
+                                                        <rect key="frame" x="0.0" y="73" width="304" height="45"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mKE-FW-2LU" id="uyx-G5-NKw">
-                                                            <rect key="frame" x="0.0" y="0.0" width="294" height="45"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="304" height="45"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Field Label" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4P-u9-cvu" userLabel="Field Name Label">
@@ -197,8 +198,8 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kS9-M8-aNu">
-                                                        <rect key="frame" x="88.5" y="0.0" width="255.5" height="32"/>
+                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kS9-M8-aNu">
+                                                        <rect key="frame" x="88.5" y="0.0" width="174.5" height="32"/>
                                                         <segments>
                                                             <segment title="First"/>
                                                             <segment title="Second"/>
@@ -207,6 +208,16 @@
                                                             <action selector="didChangeDelegate:" destination="BYZ-38-t0r" eventType="valueChanged" id="mGg-gI-RL2"/>
                                                         </connections>
                                                     </segmentedControl>
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rF4-qD-hjd">
+                                                        <rect key="frame" x="273" y="0.0" width="71" height="31"/>
+                                                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                                        <state key="normal" title="Use Video">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="didTapVideoButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="sTT-FA-a44"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -215,10 +226,10 @@
                                             <constraint firstItem="RXH-7X-MUd" firstAttribute="leading" secondItem="cOj-2t-SbP" secondAttribute="leading" id="3wP-lN-o3t"/>
                                             <constraint firstItem="RXH-7X-MUd" firstAttribute="trailing" secondItem="cOj-2t-SbP" secondAttribute="trailing" id="Ej9-gR-bWk"/>
                                             <constraint firstItem="cOj-2t-SbP" firstAttribute="width" secondItem="nFg-A5-Dew" secondAttribute="width" constant="-70" id="VyB-yT-Tey"/>
-                                            <constraint firstItem="3e4-S8-Ouh" firstAttribute="top" secondItem="nFg-A5-Dew" secondAttribute="top" constant="30" id="XBT-uR-wI0"/>
+                                            <constraint firstItem="3e4-S8-Ouh" firstAttribute="top" secondItem="nFg-A5-Dew" secondAttribute="top" constant="30" id="XBT-uR-wI0" userLabel="Table View.top = top + 10"/>
                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cOj-2t-SbP" secondAttribute="bottom" priority="250" constant="30" id="YjT-kc-3Yi"/>
                                             <constraint firstItem="3e4-S8-Ouh" firstAttribute="bottom" secondItem="cOj-2t-SbP" secondAttribute="top" constant="-10" id="lEI-3O-3zh"/>
-                                            <constraint firstItem="cOj-2t-SbP" firstAttribute="bottom" secondItem="RXH-7X-MUd" secondAttribute="top" constant="-20" id="npw-gf-o7m"/>
+                                            <constraint firstItem="cOj-2t-SbP" firstAttribute="bottom" secondItem="RXH-7X-MUd" secondAttribute="top" constant="-20" id="npw-gf-o7m" userLabel="Thread Stack View.bottom = Delegates Stack View.top"/>
                                             <constraint firstItem="3e4-S8-Ouh" firstAttribute="width" secondItem="nFg-A5-Dew" secondAttribute="width" constant="-120" id="orY-Ah-Jzt"/>
                                             <constraint firstItem="3e4-S8-Ouh" firstAttribute="centerX" secondItem="nFg-A5-Dew" secondAttribute="centerX" id="tIF-GC-QXD"/>
                                             <constraint firstItem="cOj-2t-SbP" firstAttribute="centerX" secondItem="nFg-A5-Dew" secondAttribute="centerX" id="xwh-fU-JP1"/>
@@ -274,8 +285,36 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
         </scene>
+        <!--Video View Controller-->
+        <scene sceneID="nRn-aU-c55">
+            <objects>
+                <viewController storyboardIdentifier="video" id="5Bz-hm-zYK" customClass="VideoViewController" customModule="PoseNet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PcT-1z-ku1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cT0-xW-ZaC">
+                                <rect key="frame" x="87" y="266" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="FsL-f7-YhB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xBc-lO-DVi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="972" y="138"/>
+        </scene>
     </scenes>
     <resources>
         <image name="tfl_logo.png" width="294" height="47"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
