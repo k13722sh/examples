@@ -156,8 +156,16 @@ class ViewController: UIViewController {
   }
     
   @IBAction func didTapVideoButton() {
-    let vc = VideoViewController()
-    present(vc, animated:true)
+    if #available(iOS 13.0, *) {
+        guard let vc = storyboard?.instantiateViewController(identifier: "video") as? VideoViewController else {
+            return
+        }
+        present(vc, animated:true)
+    } else {
+        // Fallback on earlier versions
+        return
+    }
+    
   }
 
   func presentUnableToResumeSessionAlert() {
