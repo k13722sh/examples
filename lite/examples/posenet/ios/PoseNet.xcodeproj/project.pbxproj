@@ -26,6 +26,7 @@
 		84D6576D2387BB7E0048171E /* CGSizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D6576C2387BB7E0048171E /* CGSizeExtension.swift */; };
 		84FCF5922387BD7900663812 /* tfl_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 84FCF5912387BD7900663812 /* tfl_logo.png */; };
 		E2582B9C25E9372600F72AD4 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2582B9B25E9372600F72AD4 /* VideoViewController.swift */; };
+		E2DF660E25ECF6FA00777328 /* RightShoulderAlfie.MOV in Resources */ = {isa = PBXBuildFile; fileRef = E2DF660D25ECF6FA00777328 /* RightShoulderAlfie.MOV */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		A1CE41C09920CCEC31985547 /* Pods_PoseNet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PoseNet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2BFF06D0AE9137D332447F3 /* Pods-PoseNet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoseNet.release.xcconfig"; path = "Target Support Files/Pods-PoseNet/Pods-PoseNet.release.xcconfig"; sourceTree = "<group>"; };
 		E2582B9B25E9372600F72AD4 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		E2DF660D25ECF6FA00777328 /* RightShoulderAlfie.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = RightShoulderAlfie.MOV; sourceTree = "<group>"; };
 		FCA88463911267B1001A596F /* Pods-PoseNet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoseNet.debug.xcconfig"; path = "Target Support Files/Pods-PoseNet/Pods-PoseNet.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,6 +160,7 @@
 		84B67CED2326338300A11A08 /* PoseNet */ = {
 			isa = PBXGroup;
 			children = (
+				E2DF660D25ECF6FA00777328 /* RightShoulderAlfie.MOV */,
 				840ECB1E238BAA0D00C7D88A /* Cells */,
 				842DDB6C2372A80E00F6BB94 /* Views */,
 				848842A22370180C0043FC4C /* Model */,
@@ -263,6 +266,7 @@
 			files = (
 				8402440123D9834600704ABD /* README.md in Resources */,
 				840EDD022341DE380017ED42 /* Main.storyboard in Resources */,
+				E2DF660E25ECF6FA00777328 /* RightShoulderAlfie.MOV in Resources */,
 				840EDCFD2341DDD30017ED42 /* Launch Screen.storyboard in Resources */,
 				84FCF5922387BD7900663812 /* tfl_logo.png in Resources */,
 				84B67CF62326338400A11A08 /* Assets.xcassets in Resources */,
