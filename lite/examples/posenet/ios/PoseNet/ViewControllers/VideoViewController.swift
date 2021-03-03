@@ -15,33 +15,22 @@ class VideoViewController: UIViewController {
     
     // Need exclamation mark
     @IBOutlet var imageView: UIImageView!
+    var videoURL: NSURL? // ??? Maybe move back to didSelectVideo
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .systemOrange
-        // Do any additional setup after loading the view.
+        // Called only once, here is where you build views that live for entire lifecycle of controller
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        /*
-        let player = AVPlayer(url: URL(fileURLWithPath: Bundle.main.path(forResource: "RightShoulderAlfie", ofType: "MOV")!))
-        // Object to render player to view
-        let layer = AVPlayerLayer(player: player)
-        // Set layer frame to be the entire view
-        layer.frame = view.bounds
-        // Add as a sublayer to the views layer
-        view.layer.addSublayer(layer)
-        // Set volume to 0 and play video
-        player.volume = 0
-        player.play()
- */
+        // Called multiple times here is where dynamic view like UI drawing or playing video are called
     }
     
     @IBAction func didSelectVideo() {
         let cat = UIImagePickerController()
-        //var videoURL: NSURL?
         cat.sourceType = .savedPhotosAlbum
         cat.delegate = self
         // Need to explicitly set media type in order to select video
@@ -66,7 +55,7 @@ class VideoViewController: UIViewController {
                 return nil
             }
         }
-
+    
 }
 
 extension VideoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -74,17 +63,11 @@ extension VideoViewController: UIImagePickerControllerDelegate, UINavigationCont
         print("\(info)")
         
         if let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? NSURL {
-            //print("Ta-da:")
-            //print(videoURL)
-            
+            print("Ta-da:")
+            print(videoURL)
             imageView.image = previewImageFromVideo(url: videoURL)!
-            
             imageView.contentMode = .scaleAspectFit
 
-        }
-        
-        if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")]as? UIImage {
-            imageView.image = image
         }
         picker.dismiss(animated: true, completion: nil)
     }

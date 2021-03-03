@@ -373,7 +373,7 @@ fileprivate enum InferenceSections: Int, CaseIterable {
   var description: String {
     switch self {
     case .Score:
-      return "Score" // Score vs Angle
+      return "Angle" // Score vs Angle
     case .Time:
       return "Processing Time"
     }

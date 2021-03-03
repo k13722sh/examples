@@ -309,6 +309,10 @@
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="03p-rt-8ze">
                                 <rect key="frame" x="20" y="64" width="374" height="703"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="OHd-52-ueI" appends="YES" id="ArZ-ut-545"/>
+                                </connections>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FsL-f7-YhB"/>
@@ -328,6 +332,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xBc-lO-DVi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="OHd-52-ueI">
+                    <connections>
+                        <action selector="videoTappedWithSender:" destination="5Bz-hm-zYK" id="yJv-nh-iom"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="971.01449275362324" y="137.94642857142856"/>
         </scene>
