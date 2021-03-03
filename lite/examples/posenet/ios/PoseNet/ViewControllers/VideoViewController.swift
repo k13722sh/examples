@@ -8,12 +8,14 @@
 
 import AVFoundation
 import AVKit
+import MobileCoreServices
 import UIKit
 
 class VideoViewController: UIViewController {
     
     // Need exclamation mark
     @IBOutlet var imageView: UIImageView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,10 +23,9 @@ class VideoViewController: UIViewController {
         view.backgroundColor = .systemOrange
         // Do any additional setup after loading the view.
     }
-    /*
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        /*
         let player = AVPlayer(url: URL(fileURLWithPath: Bundle.main.path(forResource: "RightShoulderAlfie", ofType: "MOV")!))
         // Object to render player to view
         let layer = AVPlayerLayer(player: player)
@@ -35,34 +36,53 @@ class VideoViewController: UIViewController {
         // Set volume to 0 and play video
         player.volume = 0
         player.play()
-        
-    } */
+ */
+    }
     
     @IBAction func didSelectVideo() {
-        let vc = UIImagePickerController()
-        vc.sourceType = .photoLibrary
-        vc.delegate = self
-        // Allows selection of a square of the photo
-        vc.allowsEditing = true
-        present(vc, animated: true)
-        
+        let cat = UIImagePickerController()
+        //var videoURL: NSURL?
+        cat.sourceType = .savedPhotosAlbum
+        cat.delegate = self
+        // Need to explicitly set media type in order to select video
+        cat.mediaTypes = ["public.movie"]
+        present(cat, animated: true)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    // From https://github.com/KrisYu/stackoverflow/blob/master/imagePickerDemo/imagePickerDemo/ViewController.swift
+    func previewImageFromVideo(url:NSURL) -> UIImage? {
+        let asset = AVAsset(url:url as URL)
+            let imageGenerator = AVAssetImageGenerator(asset:asset)
+            imageGenerator.appliesPreferredTrackTransform = true
+            
+            var time = asset.duration
+            time.value = min(time.value,2)
+            
+            do {
+                let imageRef = try imageGenerator.copyCGImage(at: time, actualTime: nil)
+                return UIImage(cgImage: imageRef)
+            } catch {
+                return nil
+            }
+        }
 
 }
 
 extension VideoViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("\(info)")
+        
+        if let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? NSURL {
+            //print("Ta-da:")
+            //print(videoURL)
+            
+            imageView.image = previewImageFromVideo(url: videoURL)!
+            
+            imageView.contentMode = .scaleAspectFit
+
+        }
+        
         if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")]as? UIImage {
             imageView.image = image
         }
