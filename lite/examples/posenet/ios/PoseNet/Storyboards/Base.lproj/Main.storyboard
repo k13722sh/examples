@@ -285,67 +285,9 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
         </scene>
-        <!--Video View Controller-->
-        <scene sceneID="nRn-aU-c55">
-            <objects>
-                <viewController storyboardIdentifier="video" id="5Bz-hm-zYK" customClass="VideoViewController" customModule="PoseNet" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="PcT-1z-ku1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZF-7x-U4Y">
-                                <rect key="frame" x="20" y="787" width="374" height="55"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="OPx-eT-MWr"/>
-                                </constraints>
-                                <state key="normal" title="Select A Video">
-                                    <color key="titleColor" systemColor="systemOrangeColor"/>
-                                    <color key="titleShadowColor" systemColor="systemOrangeColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="didSelectVideo" destination="5Bz-hm-zYK" eventType="touchUpInside" id="Nm3-BJ-lmi"/>
-                                </connections>
-                            </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="03p-rt-8ze">
-                                <rect key="frame" x="20" y="64" width="374" height="703"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="OHd-52-ueI" appends="YES" id="ArZ-ut-545"/>
-                                </connections>
-                            </imageView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="FsL-f7-YhB"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="AZF-7x-U4Y" firstAttribute="leading" secondItem="FsL-f7-YhB" secondAttribute="leading" constant="20" id="0ro-Wu-SsT"/>
-                            <constraint firstItem="FsL-f7-YhB" firstAttribute="trailing" secondItem="AZF-7x-U4Y" secondAttribute="trailing" constant="20" id="2l6-JM-ElW"/>
-                            <constraint firstItem="FsL-f7-YhB" firstAttribute="bottom" secondItem="AZF-7x-U4Y" secondAttribute="bottom" constant="20" id="VjN-M1-WuZ"/>
-                            <constraint firstItem="03p-rt-8ze" firstAttribute="leading" secondItem="FsL-f7-YhB" secondAttribute="leading" constant="20" id="kC9-ww-5xe"/>
-                            <constraint firstItem="03p-rt-8ze" firstAttribute="top" secondItem="FsL-f7-YhB" secondAttribute="top" constant="20" id="nU4-vD-GbD"/>
-                            <constraint firstItem="AZF-7x-U4Y" firstAttribute="top" secondItem="03p-rt-8ze" secondAttribute="bottom" constant="20" id="q2U-yQ-NQC"/>
-                            <constraint firstItem="FsL-f7-YhB" firstAttribute="trailing" secondItem="03p-rt-8ze" secondAttribute="trailing" constant="20" id="uBZ-7H-BUt"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="imageView" destination="03p-rt-8ze" id="eki-wr-u78"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xBc-lO-DVi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="OHd-52-ueI">
-                    <connections>
-                        <action selector="videoTappedWithSender:" destination="5Bz-hm-zYK" id="yJv-nh-iom"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="971.01449275362324" y="137.94642857142856"/>
-        </scene>
     </scenes>
     <resources>
         <image name="tfl_logo.png" width="294" height="47"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
