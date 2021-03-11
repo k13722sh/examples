@@ -288,7 +288,7 @@ class ModelDataHandler {
     dy = rShoulder.y - rElbow.y
     dx = rShoulder.x - rElbow.x
     
-    // If dy is -ve then the arm is pointing down to the right else it is up to the right and 90 dgerees needs to be added on to the final answer
+    // If dy is -ve then the arm is pointing down to the right else it is up to the right and 90 degrees needs to be added on to the final answer
     if (dy < 0) {
         angleTangent = dx / dy
         angle = atan(abs(angleTangent)) * (180 / .pi)

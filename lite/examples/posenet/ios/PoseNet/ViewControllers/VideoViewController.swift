@@ -30,12 +30,12 @@ class VideoViewController: UIViewController {
     }
     
     @IBAction func didSelectVideo() {
-        let cat = UIImagePickerController()
-        cat.sourceType = .savedPhotosAlbum
-        cat.delegate = self
+        let vc = UIImagePickerController()
+        vc.sourceType = .savedPhotosAlbum
+        vc.delegate = self
         // Need to explicitly set media type in order to select video
-        cat.mediaTypes = ["public.movie"]
-        present(cat, animated: true)
+        vc.mediaTypes = ["public.movie"]
+        present(vc, animated: true)
     }
     
     
@@ -67,6 +67,9 @@ extension VideoViewController: UIImagePickerControllerDelegate, UINavigationCont
             print(videoURL)
             imageView.image = previewImageFromVideo(url: videoURL)!
             imageView.contentMode = .scaleAspectFit
+            
+            // Add code to use video input
+            //isSourceVideo = true
 
         }
         picker.dismiss(animated: true, completion: nil)

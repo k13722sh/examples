@@ -35,6 +35,8 @@ class ViewController: UIViewController {
   // MARK: ModelDataHandler traits
   var threadCount: Int = Constants.defaultThreadCount
   var delegate: Delegates = Constants.defaultDelegate
+  var isSourceVideo: Bool = false // Variable used to determine whether camera feed should be used
+  var test: Int = 0
 
   // MARK: Result Variables
   // Inferenced data to render.
@@ -100,10 +102,11 @@ class ViewController: UIViewController {
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-
+    
     cameraCapture.checkCameraConfigurationAndStartSession()
+    
   }
-
+    
   override func viewWillDisappear(_ animated: Bool) {
     cameraCapture.stopSession()
   }
@@ -156,15 +159,22 @@ class ViewController: UIViewController {
   }
     
   @IBAction func didTapVideoButton() {
-    if #available(iOS 13.0, *) {
+    /*if #available(iOS 13.0, *) {
         guard let vc = storyboard?.instantiateViewController(identifier: "video") as? VideoViewController else {
             return
         }
         present(vc, animated:true)
+        print("View Returned?")
     } else {
         // Fallback on earlier versions
         return
-    }
+    }*/
+    let vc = UIImagePickerController()
+    vc.sourceType = .savedPhotosAlbum
+    vc.delegate = self
+    // Need to explicitly set media type in order to select video
+    vc.mediaTypes = ["public.movie"]
+    present(vc, animated: true)
     
   }
 
@@ -351,6 +361,31 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
 }
+
+extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("\(info)")
+        
+        if let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? NSURL {
+            print("Ta-da:")
+            print(videoURL)
+            //imageView.image = previewImageFromVideo(url: videoURL)!
+            //imageView.contentMode = .scaleAspectFit
+            
+            // Add code to use video input
+            isSourceVideo = true
+            cameraCapture.stopSession()
+            
+
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
 
 // MARK: - Private enums
 /// UI coinstraint values
