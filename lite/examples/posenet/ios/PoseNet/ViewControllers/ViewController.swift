@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import AVFoundation
+import AVKit
 import UIKit
 import os
 
@@ -159,16 +160,6 @@ class ViewController: UIViewController {
   }
     
   @IBAction func didTapVideoButton() {
-    /*if #available(iOS 13.0, *) {
-        guard let vc = storyboard?.instantiateViewController(identifier: "video") as? VideoViewController else {
-            return
-        }
-        present(vc, animated:true)
-        print("View Returned?")
-    } else {
-        // Fallback on earlier versions
-        return
-    }*/
     let vc = UIImagePickerController()
     vc.sourceType = .savedPhotosAlbum
     vc.delegate = self
@@ -375,10 +366,19 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
             // Add code to use video input
             isSourceVideo = true
             cameraCapture.stopSession()
+            let video = AVPlayer(url: (videoURL as URL))
+            // I want to add AVPlayer to the previewView layer (i.e where the camera feed plays)
+            //previewView.previewLayer = AVPlayerLayer(player: video)
+            //layer.frame = view.bounds
+            //view.layer.insertSublayer(layer, at: 1)
             
+            video.play()
+    
+            picker.dismiss(animated: true, completion: nil)
 
+        } else {
+            picker.dismiss(animated: true, completion: nil)
         }
-        picker.dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
