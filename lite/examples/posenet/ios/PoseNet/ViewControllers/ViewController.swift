@@ -28,10 +28,10 @@ class ViewController: UIViewController {
 
   @IBOutlet weak var tableView: UITableView!
 
-  @IBOutlet weak var threadCountLabel: UILabel!
-  @IBOutlet weak var threadCountStepper: UIStepper!
+  //@IBOutlet weak var threadCountLabel: UILabel!
+  //@IBOutlet weak var threadCountStepper: UIStepper!
 
-  @IBOutlet weak var delegatesControl: UISegmentedControl!
+  //@IBOutlet weak var delegatesControl: UISegmentedControl!
 
   // MARK: ModelDataHandler traits
   var threadCount: Int = Constants.defaultThreadCount
@@ -71,11 +71,15 @@ class ViewController: UIViewController {
     cameraCapture.delegate = self
     tableView.delegate = self
     tableView.dataSource = self
+    
+    //threadCountLabel.isHidden = true
+    //threadCountStepper.isHidden = true
+    //delegatesControl.isHidden = true
 
     // MARK: UI Initialization
     // Setup thread count stepper with white color.
     // https://forums.developer.apple.com/thread/121495
-    threadCountStepper.setDecrementImage(
+    /*threadCountStepper.setDecrementImage(
       threadCountStepper.decrementImage(for: .normal), for: .normal)
     threadCountStepper.setIncrementImage(
       threadCountStepper.incrementImage(for: .normal), for: .normal)
@@ -98,7 +102,7 @@ class ViewController: UIViewController {
         at: delegate.rawValue,
         animated: false)
     }
-    delegatesControl.selectedSegmentIndex = 0
+    delegatesControl.selectedSegmentIndex = 0*/
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -118,7 +122,7 @@ class ViewController: UIViewController {
   }
 
   // MARK: Button Actions
-  @IBAction func didChangeThreadCount(_ sender: UIStepper) {
+  /*@IBAction func didChangeThreadCount(_ sender: UIStepper) {
     let changedCount = Int(sender.value)
     if threadCountLabel.text == changedCount.description {
       return
@@ -132,9 +136,9 @@ class ViewController: UIViewController {
     threadCount = changedCount
     threadCountLabel.text = changedCount.description
     os_log("Thread count is changed to: %d", threadCount)
-  }
+  }*/
 
-  @IBAction func didChangeDelegate(_ sender: UISegmentedControl) {
+  /*@IBAction func didChangeDelegate(_ sender: UISegmentedControl) {
     guard let changedDelegate = Delegates(rawValue: delegatesControl.selectedSegmentIndex) else {
       fatalError("Unexpected value from delegates segemented controller.")
     }
@@ -145,7 +149,7 @@ class ViewController: UIViewController {
     }
     delegate = changedDelegate
     os_log("Delegate is changed to: %s", delegate.description)
-  }
+  }*/
 
   @IBAction func didTapResumeButton(_ sender: Any) {
     cameraCapture.resumeInterruptedSession { complete in
@@ -159,7 +163,7 @@ class ViewController: UIViewController {
     }
   }
     
-  @IBAction func didTapVideoButton() {
+  /*@IBAction func didTapVideoButton() {
     let vc = UIImagePickerController()
     vc.sourceType = .savedPhotosAlbum
     vc.delegate = self
@@ -167,7 +171,7 @@ class ViewController: UIViewController {
     vc.mediaTypes = ["public.movie"]
     present(vc, animated: true)
     
-  }
+  }*/
 
   func presentUnableToResumeSessionAlert() {
     let alert = UIAlertController(
@@ -266,7 +270,7 @@ extension ViewController: CameraFeedManagerDelegate {
     }
 
     // Udpate `inferencedData` to render data in `tableView`.
-    inferencedData = InferencedData(score: result.score, times: times)
+    inferencedData = InferencedData(score: result.score, angle: result.angle, times: times)
 
     // Draw result.
     DispatchQueue.main.async {
@@ -295,6 +299,8 @@ extension ViewController: CameraFeedManagerDelegate {
 // MARK: - TableViewDelegate, TableViewDataSource Methods
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
+    print("#Sections:")
+    print(InferenceSections.allCases.count)
     return InferenceSections.allCases.count
   }
 
@@ -302,7 +308,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     guard let section = InferenceSections(rawValue: section) else {
       return 0
     }
-
+    print("Section:")
+    print(section)
+    print(section.subcaseCount)
     return section.subcaseCount
   }
 
@@ -318,8 +326,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
     switch section {
     case .Score:
-      fieldName = section.description
-        info = String(format: "%.3f", angle) // data.score vs angle
+        fieldName = section.description
+        info = String(format: "%.3f", data.score) // data.score vs angle
+    case .Angle:
+        fieldName = section.description
+        info = String(format: "%.3f", data.angle) // data.score vs angle
     case .Time:
       guard let row = ProcessingTimes(rawValue: indexPath.row) else {
         return cell
@@ -339,7 +350,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     return cell
   }
 
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+ /* func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     guard let section = InferenceSections(rawValue: indexPath.section) else {
       return 0
     }
@@ -349,7 +360,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
       height = Traits.separatorCellHeight + Traits.bottomSpacing
     }
     return height
-  }
+  }*/
 
 }
 
@@ -397,18 +408,22 @@ fileprivate enum Traits {
 
 fileprivate struct InferencedData {
   var score: Float
+  var angle: CGFloat
   var times: Times
 }
 
 /// Type of sections in Info Cell
 fileprivate enum InferenceSections: Int, CaseIterable {
   case Score
+  case Angle
   case Time
 
   var description: String {
     switch self {
     case .Score:
-      return "Angle" // Score vs Angle
+      return "Score" // Score vs Angle
+    case .Angle:
+      return "Angle"
     case .Time:
       return "Processing Time"
     }
@@ -417,6 +432,8 @@ fileprivate enum InferenceSections: Int, CaseIterable {
   var subcaseCount: Int {
     switch self {
     case .Score:
+      return 1
+    case .Angle:
       return 1
     case .Time:
       return ProcessingTimes.allCases.count

@@ -247,7 +247,7 @@ class ModelDataHandler {
 
     // MARK: Transform key point position and make lines
     // Make `Result` from `keypointPosition'. Each point is adjusted to `ViewSize` to be drawn.
-    var result = Result(dots: [], lines: [], score: totalScore)
+    var result = Result(dots: [], lines: [], score: totalScore, angle: 0)
     var bodyPartToDotMap = [BodyPart: CGPoint]()
     for (index, part) in BodyPart.allCases.enumerated() {
       let position = CGPoint(
@@ -291,22 +291,10 @@ class ModelDataHandler {
     // If dy is -ve then the arm is pointing down to the right else it is up to the right and 90 degrees needs to be added on to the final answer
     if (dy < 0) {
         angleTangent = dx / dy
-        angle = atan(abs(angleTangent)) * (180 / .pi)
+        result.angle = atan(abs(angleTangent)) * (180 / .pi)
     } else {
         angleTangent = dy / dx
-        angle = atan(abs(angleTangent)) * (180 / .pi) + 90
-    }
-    
-    if printOut == 1 {
-        print(rElbow.x, rElbow.y, rShoulder.x, rShoulder.y)
-        print(dy, dx)
-        print(angleTangent)
-        print(angle)
-        printOut = 0 /*
-        for n in 0...16 {
-            print(result.dots[n])
-            printOut = 0
-        } */
+        result.angle = atan(abs(angleTangent)) * (180 / .pi) + 90
     }
     
 
@@ -376,6 +364,7 @@ struct Result {
   var dots: [CGPoint]
   var lines: [Line]
   var score: Float
+  var angle: CGFloat
 }
 
 enum BodyPart: String, CaseIterable {
