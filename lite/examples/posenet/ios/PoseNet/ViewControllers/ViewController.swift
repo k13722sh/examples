@@ -331,6 +331,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     case .Angle:
         fieldName = section.description
         info = String(format: "%.3f", data.angle) // data.score vs angle
+    case .MaxAngle:
+        fieldName = section.description
+        info = String(format: "%.3f", maxAngle) // data.score vs angle
     case .Time:
       guard let row = ProcessingTimes(rawValue: indexPath.row) else {
         return cell
@@ -416,27 +419,32 @@ fileprivate struct InferencedData {
 fileprivate enum InferenceSections: Int, CaseIterable {
   case Score
   case Angle
+  case MaxAngle
   case Time
 
   var description: String {
     switch self {
     case .Score:
-      return "Score" // Score vs Angle
+        return "Score" // Score vs Angle
     case .Angle:
-      return "Angle"
+        return "Angle"
+    case .MaxAngle:
+        return "MaxAngle"
     case .Time:
-      return "Processing Time"
+        return "Processing Time"
     }
   }
 
   var subcaseCount: Int {
     switch self {
     case .Score:
-      return 1
+        return 1
     case .Angle:
-      return 1
+        return 1
+    case .MaxAngle:
+        return 1
     case .Time:
-      return ProcessingTimes.allCases.count
+        return ProcessingTimes.allCases.count
     }
   }
 }

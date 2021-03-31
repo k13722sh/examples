@@ -277,26 +277,34 @@ class ModelDataHandler {
     }
     
     // MARK: Method stub to return an angle (My Code)
-    // Returns an angle of 45 degrees
-    rElbow = result.dots[8]
-    rShoulder = result.dots[6]
-    rWrist = result.dots[10]
+    // If statement to calculate the angle. To ensure accurate results the angle is only
+    // calculated if the score is above a certain threshold.
+    if totalScore > 0.5 {
+        // Load the coordinates of the right elbow, shoulder and wrist from the model result
+        rElbow = result.dots[8]
+        rShoulder = result.dots[6]
+        rWrist = result.dots[10]
     
-    //print(rElbow, rShoulder, rWrist)
+        // Calculate the length from shoulder to elbow using pythagoras
+        dy = rShoulder.y - rElbow.y
+        dx = rShoulder.x - rElbow.x
     
-    // Calculate the length from shoulder to elbow using pythagoras
-    dy = rShoulder.y - rElbow.y
-    dx = rShoulder.x - rElbow.x
-    
-    // If dy is -ve then the arm is pointing down to the right else it is up to the right and 90 degrees needs to be added on to the final answer
-    if (dy < 0) {
-        angleTangent = dx / dy
-        result.angle = atan(abs(angleTangent)) * (180 / .pi)
-    } else {
-        angleTangent = dy / dx
-        result.angle = atan(abs(angleTangent)) * (180 / .pi) + 90
-    }
-    
+        // If dy is -ve then the arm is pointing down to the right else it is up to the right and 90 degrees needs to be added on to the final answer
+        if (dy < 0) {
+            angleTangent = dx / dy
+            result.angle = atan(abs(angleTangent)) * (180 / .pi)
+        } else {
+            angleTangent = dy / dx
+            result.angle = atan(abs(angleTangent)) * (180 / .pi) + 90
+        } // if-else
+        
+        // If the angle calculated is greater than maxAngle then update it
+        if result.angle > maxAngle {
+            maxAngle = result.angle
+            print("The maximum angle is:")
+            print(maxAngle)
+        }
+    } // if
 
     return result
   }
@@ -331,6 +339,7 @@ class ModelDataHandler {
 }
 
 // MARK: My Variables
+var maxAngle: CGFloat = 0.0
 var angle: CGFloat = 0.0
 var angleTangent: CGFloat = 0.0
 var dy: CGFloat = 0.0
