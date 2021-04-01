@@ -43,9 +43,6 @@ class ViewController: UIViewController {
   // Inferenced data to render.
   private var inferencedData: InferencedData?
 
-  // Minimum score to render the result.
-  private let minimumScore: Float = 0.5
-
   // Relative location of `overlayView` to `previewView`.
   private var overlayViewFrame: CGRect?
 
@@ -276,7 +273,7 @@ extension ViewController: CameraFeedManagerDelegate {
     DispatchQueue.main.async {
       self.tableView.reloadData()
       // If score is too low, clear result remaining in the overlayView.
-      if result.score < self.minimumScore {
+      if result.score < minimumScore {
         self.clearResult()
         return
       }
@@ -299,8 +296,8 @@ extension ViewController: CameraFeedManagerDelegate {
 // MARK: - TableViewDelegate, TableViewDataSource Methods
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
-    print("#Sections:")
-    print(InferenceSections.allCases.count)
+    //print("#Sections:")
+    //print(InferenceSections.allCases.count)
     return InferenceSections.allCases.count
   }
 
@@ -308,9 +305,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     guard let section = InferenceSections(rawValue: section) else {
       return 0
     }
-    print("Section:")
-    print(section)
-    print(section.subcaseCount)
+    //print("Section:")
+    //print(section)
+    //print(section.subcaseCount)
     return section.subcaseCount
   }
 
@@ -334,6 +331,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     case .MaxAngle:
         fieldName = section.description
         info = String(format: "%.3f", maxAngle) // data.score vs angle
+    case .HighScore:
+        fieldName = section.description
+        info = String(format: "%.3f", highScore) // data.score vs angle
+    /*
     case .Time:
       guard let row = ProcessingTimes(rawValue: indexPath.row) else {
         return cell
@@ -344,7 +345,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         time = data.times.inference
       }
       fieldName = row.description
-      info = String(format: "%.2fms", time)
+      info = String(format: "%.2fms", time) */
     }
 
     cell.fieldNameLabel.text = fieldName
@@ -417,10 +418,11 @@ fileprivate struct InferencedData {
 
 /// Type of sections in Info Cell
 fileprivate enum InferenceSections: Int, CaseIterable {
-  case Score
-  case Angle
-  case MaxAngle
-  case Time
+    case Score
+    case Angle
+    case MaxAngle
+    case HighScore
+    //case Time
 
   var description: String {
     switch self {
@@ -430,8 +432,12 @@ fileprivate enum InferenceSections: Int, CaseIterable {
         return "Angle"
     case .MaxAngle:
         return "MaxAngle"
+    case .HighScore:
+        return "Highest Score"
+    /*
     case .Time:
         return "Processing Time"
+    */
     }
   }
 
@@ -443,8 +449,12 @@ fileprivate enum InferenceSections: Int, CaseIterable {
         return 1
     case .MaxAngle:
         return 1
+    case .HighScore:
+        return 1
+    /*
     case .Time:
         return ProcessingTimes.allCases.count
+    */
     }
   }
 }

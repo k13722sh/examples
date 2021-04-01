@@ -279,7 +279,7 @@ class ModelDataHandler {
     // MARK: Method stub to return an angle (My Code)
     // If statement to calculate the angle. To ensure accurate results the angle is only
     // calculated if the score is above a certain threshold.
-    if totalScore > 0.5 {
+    if totalScore > minimumScore {
         // Load the coordinates of the right elbow, shoulder and wrist from the model result
         rElbow = result.dots[8]
         rShoulder = result.dots[6]
@@ -301,8 +301,14 @@ class ModelDataHandler {
         // If the angle calculated is greater than maxAngle then update it
         if result.angle > maxAngle {
             maxAngle = result.angle
-            print("The maximum angle is:")
-            print(maxAngle)
+            //print("The maximum angle is:")
+            //print(maxAngle)
+        }
+        
+        // See highest score in a session
+        if totalScore > highScore {
+            highScore = totalScore
+            print(highScore)
         }
     } // if
 
@@ -350,6 +356,9 @@ var rElbow: CGPoint = CGPoint.init()
 var rShoulder: CGPoint = CGPoint.init()
 var rWrist: CGPoint = CGPoint.init()
 var printOut: Int = 1
+// Minimum score to render the result.
+let minimumScore: Float = 0.8
+var highScore: Float = 0.0
 
 // MARK: - Data types for inference result
 struct KeyPoint {

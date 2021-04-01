@@ -47,26 +47,23 @@
                                         <rect key="frame" x="0.0" y="533" width="414" height="363"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3e4-S8-Ouh">
-                                                <rect key="frame" x="60" y="60" width="294" height="282"/>
+                                                <rect key="frame" x="60" y="0.0" width="302" height="321"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="282" id="iOo-aV-nXY"/>
-                                                </constraints>
                                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ScoreCell" rowHeight="45" id="THr-Uf-ggb" customClass="InfoCell" customModule="PoseNet" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="294" height="45"/>
+                                                        <rect key="frame" x="0.0" y="28" width="302" height="45"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="THr-Uf-ggb" id="5T1-ZQ-m0o">
-                                                            <rect key="frame" x="0.0" y="0.0" width="294" height="45"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="302" height="45"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Field Label" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mTG-UQ-Lwc" userLabel="Field Name Label">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="176.5" height="19.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="181" height="19.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
@@ -74,7 +71,7 @@
                                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="100" verticalHuggingPriority="251" text="Info Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kP-Ho-Tm4" userLabel="Info Label">
-                                                                    <rect key="frame" x="176.5" y="0.0" width="117.5" height="19.5"/>
+                                                                    <rect key="frame" x="181" y="0.0" width="121" height="19.5"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -112,9 +109,10 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="3e4-S8-Ouh" firstAttribute="top" secondItem="nFg-A5-Dew" secondAttribute="top" constant="60" id="AxV-at-N6M"/>
-                                            <constraint firstItem="3e4-S8-Ouh" firstAttribute="centerX" secondItem="nFg-A5-Dew" secondAttribute="centerX" id="P1w-66-pLM"/>
-                                            <constraint firstItem="3e4-S8-Ouh" firstAttribute="leading" secondItem="nFg-A5-Dew" secondAttribute="leading" constant="60" id="Qi6-Td-wBK"/>
+                                            <constraint firstAttribute="trailing" secondItem="3e4-S8-Ouh" secondAttribute="trailing" constant="52" id="H5V-CM-uvA"/>
+                                            <constraint firstItem="3e4-S8-Ouh" firstAttribute="top" secondItem="nFg-A5-Dew" secondAttribute="top" id="Qjz-nN-PkJ"/>
+                                            <constraint firstItem="3e4-S8-Ouh" firstAttribute="bottom" secondItem="nFg-A5-Dew" secondAttribute="bottomMargin" id="Whp-ch-XuZ"/>
+                                            <constraint firstItem="3e4-S8-Ouh" firstAttribute="leading" secondItem="nFg-A5-Dew" secondAttribute="leading" constant="60" id="aYC-JG-fCD"/>
                                         </constraints>
                                     </view>
                                 </subviews>
