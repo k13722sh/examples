@@ -159,6 +159,16 @@ class ViewController: UIViewController {
       }
     }
   }
+  
+  @IBAction func didStartStopSession() {
+    print(recordingData)
+    if recordingData == true {
+      recordingData = false
+    } else {
+      recordingData = true
+    }
+    print(recordingData)
+  }
     
   /*@IBAction func didTapVideoButton() {
     let vc = UIImagePickerController()

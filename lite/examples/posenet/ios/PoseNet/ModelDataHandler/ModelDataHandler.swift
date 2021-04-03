@@ -276,6 +276,7 @@ class ModelDataHandler {
       return nil
     }
     
+    if recordingData == true {
     // MARK: Method stub to return an angle (My Code)
     // If statement to calculate the angle. To ensure accurate results the angle is only
     // calculated if the score is above a certain threshold.
@@ -285,7 +286,7 @@ class ModelDataHandler {
         rShoulder = result.dots[6]
         rWrist = result.dots[10]
     
-        // Calculate the length from shoulder to elbow using pythagoras
+        // Calculate the change in y and x between the shoulder point and the elbow point
         dy = rShoulder.y - rElbow.y
         dx = rShoulder.x - rElbow.x
     
@@ -311,9 +312,10 @@ class ModelDataHandler {
             print(highScore)
         }
     } // if
-
+    } // if recordingData
     return result
   }
+  
 
   /// Run inference with given `Data`
   ///
@@ -359,6 +361,7 @@ var printOut: Int = 1
 // Minimum score to render the result.
 let minimumScore: Float = 0.8
 var highScore: Float = 0.0
+var recordingData: Bool = false
 
 // MARK: - Data types for inference result
 struct KeyPoint {
