@@ -163,7 +163,12 @@ class ViewController: UIViewController {
   @IBAction func didStartStopSession() {
     print(recordingData)
     if recordingData == true {
+      print(pastAngles)
+      // If data is currently being recorded stop the session by setting recording data to false
       recordingData = false
+      // Save the maximum angle found in the session.
+      pastAngles.append(maxAngle)
+      print(pastAngles)
     } else {
       recordingData = true
     }

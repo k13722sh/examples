@@ -277,10 +277,10 @@ class ModelDataHandler {
     }
     
     if recordingData == true {
-    // MARK: Method stub to return an angle (My Code)
-    // If statement to calculate the angle. To ensure accurate results the angle is only
-    // calculated if the score is above a certain threshold.
-    if totalScore > minimumScore {
+      // MARK: Method stub to return an angle (My Code)
+      // If statement to calculate the angle. To ensure accurate results the angle is only
+      // calculated if the score is above a certain threshold.
+      if totalScore > minimumScore {
         // Load the coordinates of the right elbow, shoulder and wrist from the model result
         rElbow = result.dots[8]
         rShoulder = result.dots[6]
@@ -311,10 +311,10 @@ class ModelDataHandler {
             highScore = totalScore
             print(highScore)
         }
-    } // if
+      }
     } // if recordingData
     return result
-  }
+  } // postProcess
   
 
   /// Run inference with given `Data`
@@ -359,9 +359,10 @@ var rShoulder: CGPoint = CGPoint.init()
 var rWrist: CGPoint = CGPoint.init()
 var printOut: Int = 1
 // Minimum score to render the result.
-let minimumScore: Float = 0.8
+let minimumScore: Float = 0.0
 var highScore: Float = 0.0
 var recordingData: Bool = false
+var pastAngles: [CGFloat] = [10, 20, 30, 40, 50]
 
 // MARK: - Data types for inference result
 struct KeyPoint {
