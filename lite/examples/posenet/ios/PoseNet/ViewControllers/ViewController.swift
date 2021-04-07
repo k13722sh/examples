@@ -161,18 +161,20 @@ class ViewController: UIViewController {
   }
   
   @IBAction func didStartStopSession() {
-    print(recordingData)
+    //print(recordingData)
     if recordingData == true {
-      print(pastAngles)
+      //print(pastAngles)
       // If data is currently being recorded stop the session by setting recording data to false
       recordingData = false
-      // Save the maximum angle found in the session.
-      pastAngles.append(maxAngle)
-      print(pastAngles)
+      // Save the maximum angle found in the session if there was one
+      if maxAngle > 0.0 {
+        pastAngles.append(maxAngle)
+      }
+      //print(pastAngles)
     } else {
       recordingData = true
     }
-    print(recordingData)
+    //print(recordingData)
   }
     
   /*@IBAction func didTapVideoButton() {

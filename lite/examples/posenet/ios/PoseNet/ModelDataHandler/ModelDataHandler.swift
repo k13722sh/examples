@@ -301,21 +301,49 @@ class ModelDataHandler {
         
         // If the angle calculated is greater than maxAngle then update it
         if result.angle > maxAngle {
+          print("New max angle")
+          if colinear(shoulder: rShoulder, elbow: rElbow, wrist: rWrist) {
             maxAngle = result.angle
             //print("The maximum angle is:")
             //print(maxAngle)
+          }
+
         }
         
         // See highest score in a session
         if totalScore > highScore {
             highScore = totalScore
-            print(highScore)
+            //print(highScore)
         }
       }
     } // if recordingData
     return result
   } // postProcess
   
+  private func colinear(shoulder:CGPoint, elbow:CGPoint, wrist:CGPoint) -> Bool {
+    //print("Colinear called")
+    let a = CGPointDistance(from: shoulder, to: elbow)
+    let b = CGPointDistance(from: shoulder, to: wrist)
+    let c = CGPointDistance(from: elbow, to: wrist)
+    // The angle we are checking is opposite the side from shoulder to wrist
+    let cosB = ((b*b)+(c*c)-(a*a)) / (2*b*c)
+    // Find the inverse and convert to degrees
+    let eAngle = acos(cosB)*(180 / .pi)
+    if eAngle < maximumBend  {
+      //print("Angle:")
+      //print(eAngle)
+      return true
+    }
+    return false
+  }
+  
+  func CGPointDistanceSquared(from: CGPoint, to: CGPoint) -> CGFloat {
+    return (from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y)
+  }
+
+  func CGPointDistance(from: CGPoint, to: CGPoint) -> CGFloat {
+    return sqrt(CGPointDistanceSquared(from: from, to: to))
+  }
 
   /// Run inference with given `Data`
   ///
@@ -360,6 +388,7 @@ var rWrist: CGPoint = CGPoint.init()
 var printOut: Int = 1
 // Minimum score to render the result.
 let minimumScore: Float = 0.0
+let maximumBend: CGFloat = 45.0
 var highScore: Float = 0.0
 var recordingData: Bool = false
 var pastAngles: [CGFloat] = [10, 20, 30, 40, 50]
