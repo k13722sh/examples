@@ -25,6 +25,7 @@
 		84B67CF62326338400A11A08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84B67CF52326338400A11A08 /* Assets.xcassets */; };
 		84D6576D2387BB7E0048171E /* CGSizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D6576C2387BB7E0048171E /* CGSizeExtension.swift */; };
 		84FCF5922387BD7900663812 /* tfl_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 84FCF5912387BD7900663812 /* tfl_logo.png */; };
+		E2286ABB261F5A3400B3754A /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2286ABA261F5A3400B3754A /* ProgressViewController.swift */; };
 		E2DF660E25ECF6FA00777328 /* RightShoulderAlfie.MOV in Resources */ = {isa = PBXBuildFile; fileRef = E2DF660D25ECF6FA00777328 /* RightShoulderAlfie.MOV */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		84FCF5912387BD7900663812 /* tfl_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tfl_logo.png; path = Assets.xcassets/tfl_logo.png; sourceTree = "<group>"; };
 		A1CE41C09920CCEC31985547 /* Pods_PoseNet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PoseNet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2BFF06D0AE9137D332447F3 /* Pods-PoseNet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoseNet.release.xcconfig"; path = "Target Support Files/Pods-PoseNet/Pods-PoseNet.release.xcconfig"; sourceTree = "<group>"; };
+		E2286ABA261F5A3400B3754A /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		E2DF660D25ECF6FA00777328 /* RightShoulderAlfie.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = RightShoulderAlfie.MOV; sourceTree = "<group>"; };
 		FCA88463911267B1001A596F /* Pods-PoseNet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoseNet.debug.xcconfig"; path = "Target Support Files/Pods-PoseNet/Pods-PoseNet.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				84B67CF02326338300A11A08 /* ViewController.swift */,
+				E2286ABA261F5A3400B3754A /* ProgressViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				842DDB6E2372A82000F6BB94 /* OverlayView.swift in Sources */,
 				846BAF7623E7FE13006FC136 /* Constants.swift in Sources */,
 				84952CB92361874A0052C104 /* TFLiteExtension.swift in Sources */,
+				E2286ABB261F5A3400B3754A /* ProgressViewController.swift in Sources */,
 				84D6576D2387BB7E0048171E /* CGSizeExtension.swift in Sources */,
 				84B67CF12326338300A11A08 /* ViewController.swift in Sources */,
 				84B67CEF2326338300A11A08 /* AppDelegate.swift in Sources */,

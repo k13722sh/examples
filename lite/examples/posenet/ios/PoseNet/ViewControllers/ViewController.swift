@@ -27,6 +27,8 @@ class ViewController: UIViewController {
   @IBOutlet weak var cameraUnavailableLabel: UILabel!
 
   @IBOutlet weak var tableView: UITableView!
+  
+  @IBOutlet weak var startStopButton: UIButton!
 
   //@IBOutlet weak var threadCountLabel: UILabel!
   //@IBOutlet weak var threadCountStepper: UIStepper!
@@ -173,8 +175,14 @@ class ViewController: UIViewController {
       //print(pastAngles)
     } else {
       recordingData = true
+      //startStopButton.setTitle("STOP", for: UIControl.State.normal)
     }
     //print(recordingData)
+  }
+  
+  @IBAction func didTapProgressButton() {
+    let vc = storyboard?.instantiateViewController(identifier: "progress") as! ProgressViewController
+    navigationController?.pushViewController(vc, animated: true)
   }
     
   /*@IBAction func didTapVideoButton() {

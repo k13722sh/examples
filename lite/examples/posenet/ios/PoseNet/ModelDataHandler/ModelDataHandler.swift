@@ -323,10 +323,10 @@ class ModelDataHandler {
   private func colinear(shoulder:CGPoint, elbow:CGPoint, wrist:CGPoint) -> Bool {
     //print("Colinear called")
     let a = CGPointDistance(from: shoulder, to: elbow)
-    let b = CGPointDistance(from: shoulder, to: wrist)
+    let bSqrd = CGPointDistanceSquared(from: shoulder, to: wrist)
     let c = CGPointDistance(from: elbow, to: wrist)
     // The angle we are checking is opposite the side from shoulder to wrist
-    let cosB = ((b*b)+(c*c)-(a*a)) / (2*b*c)
+    let cosB = ((a*a)+(c*c)-(bSqrd)) / (2*a*c)
     // Find the inverse and convert to degrees
     let eAngle = acos(cosB)*(180 / .pi)
     if eAngle < maximumBend  {
