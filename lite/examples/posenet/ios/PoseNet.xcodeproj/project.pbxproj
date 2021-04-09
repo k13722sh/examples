@@ -216,6 +216,7 @@
 				84B67CE72326338300A11A08 /* Sources */,
 				84B67CE82326338300A11A08 /* Frameworks */,
 				84B67CE92326338300A11A08 /* Resources */,
+				96790E16818B58A1F4728C87 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -316,6 +317,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "\"$SRCROOT/RunScripts/download_models.sh\"\n";
+		};
+		96790E16818B58A1F4728C87 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PoseNet/Pods-PoseNet-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PoseNet/Pods-PoseNet-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PoseNet/Pods-PoseNet-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 

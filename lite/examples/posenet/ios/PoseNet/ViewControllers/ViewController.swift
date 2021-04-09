@@ -181,8 +181,12 @@ class ViewController: UIViewController {
   }
   
   @IBAction func didTapProgressButton() {
-    let vc = storyboard?.instantiateViewController(identifier: "progress") as! ProgressViewController
-    navigationController?.pushViewController(vc, animated: true)
+    if #available(iOS 13.0, *) {
+        let vc = storyboard?.instantiateViewController(identifier: "progress") as! ProgressViewController
+        navigationController?.pushViewController(vc, animated: true)
+    } else {
+        return
+    }
   }
     
   /*@IBAction func didTapVideoButton() {
