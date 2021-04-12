@@ -44,6 +44,8 @@ class ViewController: UIViewController {
   // MARK: Result Variables
   // Inferenced data to render.
   private var inferencedData: InferencedData?
+  
+  //var testROMEntry = [ROMEntry]()
 
   // Relative location of `overlayView` to `previewView`.
   private var overlayViewFrame: CGRect?
@@ -70,6 +72,25 @@ class ViewController: UIViewController {
     cameraCapture.delegate = self
     tableView.delegate = self
     tableView.dataSource = self
+    
+    // Initialise an array of ROMEntry values for testing
+    //var testROMEntry = [ROMEntry]()
+    var dateInSeconds = Double(620672532)
+    for x in 1..<5  {
+      // Set the date of the measurement
+      let dateOfMeasurement = Date(timeIntervalSinceReferenceDate: dateInSeconds)
+      let rom: CGFloat = 10.0 * CGFloat(x)
+      let entry = ROMEntry(date: dateOfMeasurement, angle: rom)
+      testROMEntry.append(entry)
+      dateInSeconds = dateInSeconds + (4 * 604800)
+    }
+    let formatter = DateFormatter()
+    formatter.dateStyle = .short
+    let romArraySize = (testROMEntry.count)
+    for x in 0..<romArraySize {
+      print(formatter.string(from: testROMEntry[x].date), "\t", testROMEntry[x].angle)
+    }
+    
     
     //threadCountLabel.isHidden = true
     //threadCountStepper.isHidden = true
@@ -170,7 +191,8 @@ class ViewController: UIViewController {
       recordingData = false
       // Save the maximum angle found in the session if there was one
       if maxAngle > 0.0 {
-        pastAngles.append(maxAngle)
+        let entry = ROMEntry(date: Date(), angle: maxAngle)
+        testROMEntry.append(entry)
       }
       //print(pastAngles)
     } else {

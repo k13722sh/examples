@@ -25,8 +25,13 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
         lineChart.center = view.center
         view.addSubview(lineChart)
         var entries = [ChartDataEntry]()
-        for x in 0..<10 {
-          entries.append(ChartDataEntry(x: Double(x), y: Double(x)))
+        //let noOfEntries = testROMEntry.count
+        let firstEntry = testROMEntry[0].date.timeIntervalSinceReferenceDate
+        let dateToday = Date().timeIntervalSinceReferenceDate
+        let xWidth = dateToday - firstEntry
+        for x in 0..<testROMEntry.count {
+          let adjustedDate = testROMEntry[x].date.timeIntervalSinceReferenceDate - xWidth
+          entries.append(ChartDataEntry(x: Double(adjustedDate), y: Double(testROMEntry[x].angle)))
         }
         let set = LineChartDataSet(entries: entries)
         set.colors = ChartColorTemplates.material()

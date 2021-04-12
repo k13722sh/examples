@@ -57,14 +57,14 @@ class ModelDataHandler {
     // Specify the delegates for the `Interpreter`.
     var delegates: [Delegate]?
     switch delegate {
-    case .Metal:
+    /*case .Metal:
       delegates = [MetalDelegate()]
     case .CoreML:
       if let coreMLDelegate = CoreMLDelegate() {
         delegates = [coreMLDelegate]
       } else {
         delegates = nil
-      }
+      }*/
     default:
       delegates = nil
     }
@@ -392,6 +392,8 @@ let maximumBend: CGFloat = 45.0
 var highScore: Float = 0.0
 var recordingData: Bool = false
 var pastAngles: [CGFloat] = [10, 20, 30, 40, 50]
+var testROMEntry = [ROMEntry]()
+//var testROMEntry: [ROMEntry]?
 
 // MARK: - Data types for inference result
 struct KeyPoint {
@@ -415,6 +417,11 @@ struct Result {
   var dots: [CGPoint]
   var lines: [Line]
   var score: Float
+  var angle: CGFloat
+}
+
+struct ROMEntry {
+  var date: Date
   var angle: CGFloat
 }
 
@@ -457,17 +464,17 @@ enum BodyPart: String, CaseIterable {
 // MARK: - Delegates Enum
 enum Delegates: Int, CaseIterable {
   case CPU
-  case Metal
-  case CoreML
+  //case Metal
+  //case CoreML
 
   var description: String {
     switch self {
     case .CPU:
       return "CPU"
-    case .Metal:
+   /* case .Metal:
       return "GPU"
     case .CoreML:
-      return "NPU"
+      return "NPU"*/
     }
   }
 }
