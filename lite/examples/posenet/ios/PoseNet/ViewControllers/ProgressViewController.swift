@@ -21,11 +21,13 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        // Set frame and centre for the progress chart and add to the view
         lineChart.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.width)
         lineChart.center = view.center
         view.addSubview(lineChart)
+        // Create an array of ChartEntryData and by using the date of the first ROMEntry
+        // calculate the width of the chart. Use the width to adjust the other entries so that they fit while using a for loop to add the user entries
         var entries = [ChartDataEntry]()
-        //let noOfEntries = testROMEntry.count
         let firstEntry = testROMEntry[0].date.timeIntervalSinceReferenceDate
         let dateToday = Date().timeIntervalSinceReferenceDate
         let xWidth = dateToday - firstEntry
@@ -33,6 +35,7 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
           let adjustedDate = testROMEntry[x].date.timeIntervalSinceReferenceDate - xWidth
           entries.append(ChartDataEntry(x: Double(adjustedDate), y: Double(testROMEntry[x].angle)))
         }
+        // Add the data to the chart and make changes to the appearance.
         let set = LineChartDataSet(entries: entries)
         set.colors = ChartColorTemplates.material()
         let data = LineChartData(dataSet: set)

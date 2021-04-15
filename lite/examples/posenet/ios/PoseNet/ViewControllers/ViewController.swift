@@ -73,17 +73,21 @@ class ViewController: UIViewController {
     tableView.delegate = self
     tableView.dataSource = self
     
-    // Initialise an array of ROMEntry values for testing
-    //var testROMEntry = [ROMEntry]()
+    // Initialise an array of ROMEntry (date, angle) values for testing
     var dateInSeconds = Double(620672532)
     for x in 1..<5  {
       // Set the date of the measurement
       let dateOfMeasurement = Date(timeIntervalSinceReferenceDate: dateInSeconds)
+      // Create arbitrary angle value for filling array
       let rom: CGFloat = 10.0 * CGFloat(x)
+      // Create a ROMEntry and add that value to testROMEntry
       let entry = ROMEntry(date: dateOfMeasurement, angle: rom)
       testROMEntry.append(entry)
+      // Update value of dateInSeconds so next iteration of the loop creates an entry for a month later
       dateInSeconds = dateInSeconds + (4 * 604800)
     }
+    
+    // Create a DateFormatter toprinnt out the values of the dates (check the code is working)
     let formatter = DateFormatter()
     formatter.dateStyle = .short
     let romArraySize = (testROMEntry.count)
@@ -196,10 +200,9 @@ class ViewController: UIViewController {
       }
       //print(pastAngles)
     } else {
+      // If not currently recording data begin recording data
       recordingData = true
-      //startStopButton.setTitle("STOP", for: UIControl.State.normal)
     }
-    //print(recordingData)
   }
   
   @IBAction func didTapProgressButton() {
@@ -210,16 +213,6 @@ class ViewController: UIViewController {
         return
     }
   }
-    
-  /*@IBAction func didTapVideoButton() {
-    let vc = UIImagePickerController()
-    vc.sourceType = .savedPhotosAlbum
-    vc.delegate = self
-    // Need to explicitly set media type in order to select video
-    vc.mediaTypes = ["public.movie"]
-    present(vc, animated: true)
-    
-  }*/
 
   func presentUnableToResumeSessionAlert() {
     let alert = UIAlertController(

@@ -282,27 +282,27 @@ class ModelDataHandler {
       // calculated if the score is above a certain threshold.
       if totalScore > minimumScore {
         // Load the coordinates of the right elbow, shoulder and wrist from the model result
-        rElbow = result.dots[8]
-        rShoulder = result.dots[6]
-        rWrist = result.dots[10]
+        let rElbow = result.dots[8]
+        let rShoulder = result.dots[6]
+        let rWrist = result.dots[10]
     
         // Calculate the change in y and x between the shoulder point and the elbow point
-        dy = rShoulder.y - rElbow.y
-        dx = rShoulder.x - rElbow.x
+        let dy = rShoulder.y - rElbow.y
+        let dx = rShoulder.x - rElbow.x
     
         // If dy is -ve then the arm is pointing down to the right else it is up to the right and 90 degrees needs to be added on to the final answer
         if (dy < 0) {
-            angleTangent = dx / dy
+            let angleTangent = dx / dy
             result.angle = atan(abs(angleTangent)) * (180 / .pi)
         } else {
-            angleTangent = dy / dx
+            let angleTangent = dy / dx
             result.angle = atan(abs(angleTangent)) * (180 / .pi) + 90
         } // if-else
         
         // If the angle calculated is greater than maxAngle then update it
         if result.angle > maxAngle {
           print("New max angle")
-          if colinear(shoulder: rShoulder, elbow: rElbow, wrist: rWrist) {
+          if colinear(shoulder: rShoulder, elbow: rElbow, wrist: rWrist, maxBend: 45.0) {
             maxAngle = result.angle
             //print("The maximum angle is:")
             //print(maxAngle)
@@ -320,7 +320,7 @@ class ModelDataHandler {
     return result
   } // postProcess
   
-  private func colinear(shoulder:CGPoint, elbow:CGPoint, wrist:CGPoint) -> Bool {
+  private func colinear(shoulder:CGPoint, elbow:CGPoint, wrist:CGPoint, maxBend:CGFloat) -> Bool {
     //print("Colinear called")
     let a = CGPointDistance(from: shoulder, to: elbow)
     let bSqrd = CGPointDistanceSquared(from: shoulder, to: wrist)
@@ -329,7 +329,7 @@ class ModelDataHandler {
     let cosB = ((a*a)+(c*c)-(bSqrd)) / (2*a*c)
     // Find the inverse and convert to degrees
     let eAngle = acos(cosB)*(180 / .pi)
-    if eAngle < maximumBend  {
+    if eAngle < maxBend  {
       //print("Angle:")
       //print(eAngle)
       return true
@@ -376,24 +376,23 @@ class ModelDataHandler {
 
 // MARK: My Variables
 var maxAngle: CGFloat = 0.0
-var angle: CGFloat = 0.0
-var angleTangent: CGFloat = 0.0
-var dy: CGFloat = 0.0
-var dx: CGFloat = 0.0
-var cSqrd: CGFloat = 0.0
-var hypotenuse: CGFloat = 0.0
-var rElbow: CGPoint = CGPoint.init()
-var rShoulder: CGPoint = CGPoint.init()
-var rWrist: CGPoint = CGPoint.init()
-var printOut: Int = 1
+//var printOut: Int = 1
 // Minimum score to render the result.
 let minimumScore: Float = 0.0
-let maximumBend: CGFloat = 45.0
+//let maximumBend: CGFloat = 45.0
 var highScore: Float = 0.0
 var recordingData: Bool = false
-var pastAngles: [CGFloat] = [10, 20, 30, 40, 50]
+//var pastAngles: [CGFloat] = [10, 20, 30, 40, 50]
 var testROMEntry = [ROMEntry]()
-//var testROMEntry: [ROMEntry]?
+//var angle: CGFloat = 0.0
+//var angleTangent: CGFloat = 0.0
+//var dy: CGFloat = 0.0
+//var dx: CGFloat = 0.0
+//var cSqrd: CGFloat = 0.0
+//var hypotenuse: CGFloat = 0.0
+//var rElbow: CGPoint = CGPoint.init()
+//var rShoulder: CGPoint = CGPoint.init()
+//var rWrist: CGPoint = CGPoint.init()
 
 // MARK: - Data types for inference result
 struct KeyPoint {
@@ -420,6 +419,8 @@ struct Result {
   var angle: CGFloat
 }
 
+// ROMEntry (ROM = Range of Movement) struct, stores the range of movement in the joint and the
+// date on which that entry was recorded
 struct ROMEntry {
   var date: Date
   var angle: CGFloat
