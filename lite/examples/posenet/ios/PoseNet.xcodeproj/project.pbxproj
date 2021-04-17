@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,6 +25,7 @@
 		84B67CF62326338400A11A08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84B67CF52326338400A11A08 /* Assets.xcassets */; };
 		84D6576D2387BB7E0048171E /* CGSizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D6576C2387BB7E0048171E /* CGSizeExtension.swift */; };
 		84FCF5922387BD7900663812 /* tfl_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 84FCF5912387BD7900663812 /* tfl_logo.png */; };
+		E21FA648262AFF2600E52652 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E21FA647262AFF2600E52652 /* GoogleService-Info.plist */; };
 		E2286ABB261F5A3400B3754A /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2286ABA261F5A3400B3754A /* ProgressViewController.swift */; };
 		E2DF660E25ECF6FA00777328 /* RightShoulderAlfie.MOV in Resources */ = {isa = PBXBuildFile; fileRef = E2DF660D25ECF6FA00777328 /* RightShoulderAlfie.MOV */; };
 /* End PBXBuildFile section */
@@ -52,6 +53,7 @@
 		84FCF5912387BD7900663812 /* tfl_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tfl_logo.png; path = Assets.xcassets/tfl_logo.png; sourceTree = "<group>"; };
 		A1CE41C09920CCEC31985547 /* Pods_PoseNet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PoseNet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2BFF06D0AE9137D332447F3 /* Pods-PoseNet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoseNet.release.xcconfig"; path = "Target Support Files/Pods-PoseNet/Pods-PoseNet.release.xcconfig"; sourceTree = "<group>"; };
+		E21FA647262AFF2600E52652 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E2286ABA261F5A3400B3754A /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		E2DF660D25ECF6FA00777328 /* RightShoulderAlfie.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = RightShoulderAlfie.MOV; sourceTree = "<group>"; };
 		FCA88463911267B1001A596F /* Pods-PoseNet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoseNet.debug.xcconfig"; path = "Target Support Files/Pods-PoseNet/Pods-PoseNet.debug.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				846BAF7523E7FE13006FC136 /* Constants.swift */,
 				84B67CF52326338400A11A08 /* Assets.xcassets */,
 				84FCF5912387BD7900663812 /* tfl_logo.png */,
+				E21FA647262AFF2600E52652 /* GoogleService-Info.plist */,
 				84B67CFA2326338400A11A08 /* Info.plist */,
 			);
 			path = PoseNet;
@@ -266,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8402440123D9834600704ABD /* README.md in Resources */,
+				E21FA648262AFF2600E52652 /* GoogleService-Info.plist in Resources */,
 				840EDD022341DE380017ED42 /* Main.storyboard in Resources */,
 				E2DF660E25ECF6FA00777328 /* RightShoulderAlfie.MOV in Resources */,
 				840EDCFD2341DDD30017ED42 /* Launch Screen.storyboard in Resources */,
