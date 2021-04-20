@@ -14,8 +14,6 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
         view.backgroundColor = .red
         title = "Progress"
         lineChart.delegate = self

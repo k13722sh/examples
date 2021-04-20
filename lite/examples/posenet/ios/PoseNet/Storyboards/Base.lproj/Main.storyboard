@@ -208,7 +208,7 @@
             </objects>
             <point key="canvasLocation" x="2868.115942028986" y="137.94642857142856"/>
         </scene>
-        <!--Login-->
+        <!--Login View Controller-->
         <scene sceneID="2SX-BP-psU">
             <objects>
                 <viewController storyboardIdentifier="login" id="Sxh-cB-Hd5" customClass="LoginViewController" customModule="PoseNet" customModuleProvider="target" sceneMemberID="viewController">
@@ -227,7 +227,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Jxm-jH-Iro">
-                                <rect key="frame" x="50" y="138" width="314" height="200"/>
+                                <rect key="frame" x="50" y="94" width="314" height="200"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L4T-6C-xun">
                                         <rect key="frame" x="0.0" y="0.0" width="314" height="50"/>
@@ -278,7 +278,7 @@
                             <constraint firstItem="Jxm-jH-Iro" firstAttribute="top" secondItem="0Qz-SA-cKF" secondAttribute="top" constant="50" id="yfk-fa-j1c"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Login" id="69R-Ma-N9u"/>
+                    <navigationItem key="navigationItem" id="69R-Ma-N9u"/>
                     <connections>
                         <outlet property="emailTextField" destination="L4T-6C-xun" id="5CR-sS-faX"/>
                         <outlet property="errorLabel" destination="PH0-cz-3vb" id="aoK-9x-h4Q"/>
@@ -376,10 +376,9 @@
         <!--Navigation Controller-->
         <scene sceneID="z2w-kd-YIV">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Fh4-RK-OLW" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Fh4-RK-OLW" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="sAp-ib-9WU">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

@@ -63,7 +63,7 @@ class ViewController: UIViewController {
   // MARK: View Handling Methods
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     do {
       modelDataHandler = try ModelDataHandler()
     } catch let error {
@@ -132,8 +132,7 @@ class ViewController: UIViewController {
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    // Hide the Navigation Bar
-    self.navigationController?.setNavigationBarHidden(true, animated: true)
+    
     cameraCapture.checkCameraConfigurationAndStartSession()
     
   }
