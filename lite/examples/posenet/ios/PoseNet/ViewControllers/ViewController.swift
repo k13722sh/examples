@@ -14,7 +14,7 @@
 
 import AVFoundation
 import AVKit
-import FirebaseFirestore
+//import FirebaseFirestore
 import UIKit
 import os
 
