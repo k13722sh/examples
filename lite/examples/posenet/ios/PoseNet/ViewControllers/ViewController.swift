@@ -154,6 +154,15 @@ class ViewController: UIViewController {
 
     // Get today's date to record when the angle was measured
     let today = Date()
+    
+    // Add the maximum angle achieved in the session to the database, along with the date. If the collection / document / array exists the entry otherwise they are all created.
+    database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury) Progress").updateData(["Progress": FieldValue.arrayUnion([["Date": today,"Angle": angle]])]) { err in
+      if let err = err {
+        print("Error writing document: \(err)")
+      } else {
+        print("Document successfully written!")
+      }
+    }
 
     
     // Add the max angle achieved on the current date to the database. If the client has used the app before this will update an existing document, otherwise a new one will be created
@@ -179,15 +188,6 @@ class ViewController: UIViewController {
         print("Document successfully written!")
       }
     }*/
-    
-    // Add the maximum angle achieved in the session to the database, along with the date. If the collection / document / array exists the entry otherwise they are all created.
-    database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury) Progress").updateData(["Progress": FieldValue.arrayUnion([["Date": today,"Angle": angle]])]) { err in
-      if let err = err {
-        print("Error writing document: \(err)")
-      } else {
-        print("Document successfully written!")
-      }
-    }
   }
 
   func presentUnableToResumeSessionAlert() {

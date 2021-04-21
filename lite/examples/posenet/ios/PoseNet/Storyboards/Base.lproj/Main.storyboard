@@ -16,9 +16,31 @@
                     <view key="view" contentMode="scaleToFill" id="axu-f4-lnn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LDe-mQ-MDQ">
+                                <rect key="frame" x="20" y="792" width="374" height="50"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="bu8-OO-gPs"/>
+                                </constraints>
+                                <state key="normal" title="Test">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="testButtonPressed:" destination="6fR-xD-oGJ" eventType="touchUpInside" id="wnN-KA-GQN"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="BqK-Zc-kbK"/>
-                        <color key="backgroundColor" systemColor="systemPinkColor"/>
+                        <constraints>
+                            <constraint firstItem="BqK-Zc-kbK" firstAttribute="trailing" secondItem="LDe-mQ-MDQ" secondAttribute="trailing" constant="20" id="XNa-nl-rJm"/>
+                            <constraint firstItem="BqK-Zc-kbK" firstAttribute="bottom" secondItem="LDe-mQ-MDQ" secondAttribute="bottom" constant="20" id="jBE-uV-Eg2"/>
+                            <constraint firstItem="LDe-mQ-MDQ" firstAttribute="leading" secondItem="BqK-Zc-kbK" secondAttribute="leading" constant="20" id="wYU-cF-3jH"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="testButton" destination="LDe-mQ-MDQ" id="G6w-eM-F6j"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fc6-HP-WM9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -230,9 +252,6 @@
     <resources>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
