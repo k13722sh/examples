@@ -19,22 +19,18 @@ import UIKit
 import os
 
 class ViewController: UIViewController {
-    // MARK: Storyboards Connections
+  // STRINGS FOR TESTING (WILL BE PASSED FROM A FORM)
+  let practioner = "Shawford House"
+  let firstName = "Terry"
+  let lastName = "Cruise"
+  
+  // MARK: Storyboards Connections
   @IBOutlet weak var previewView: PreviewView!
-
   @IBOutlet weak var overlayView: OverlayView!
-
   @IBOutlet weak var resumeButton: UIButton!
   @IBOutlet weak var cameraUnavailableLabel: UILabel!
-
   @IBOutlet weak var tableView: UITableView!
-  
   @IBOutlet weak var startStopButton: UIButton!
-
-  //@IBOutlet weak var threadCountLabel: UILabel!
-  //@IBOutlet weak var threadCountStepper: UIStepper!
-
-  //@IBOutlet weak var delegatesControl: UISegmentedControl!
 
   // MARK: ModelDataHandler traits
   var threadCount: Int = Constants.defaultThreadCount
@@ -45,12 +41,9 @@ class ViewController: UIViewController {
   // MARK: Result Variables
   // Inferenced data to render.
   private var inferencedData: InferencedData?
-  
-  //var testROMEntry = [ROMEntry]()
 
   // Relative location of `overlayView` to `previewView`.
   private var overlayViewFrame: CGRect?
-
   private var previewViewFrame: CGRect?
 
   // MARK: Controllers that manage functionality
@@ -63,7 +56,7 @@ class ViewController: UIViewController {
   // MARK: View Handling Methods
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     do {
       modelDataHandler = try ModelDataHandler()
     } catch let error {
@@ -95,39 +88,6 @@ class ViewController: UIViewController {
     for x in 0..<romArraySize {
       print(formatter.string(from: testROMEntry[x].date), "\t", testROMEntry[x].angle)
     }
-    
-    
-    //threadCountLabel.isHidden = true
-    //threadCountStepper.isHidden = true
-    //delegatesControl.isHidden = true
-
-    // MARK: UI Initialization
-    // Setup thread count stepper with white color.
-    // https://forums.developer.apple.com/thread/121495
-    /*threadCountStepper.setDecrementImage(
-      threadCountStepper.decrementImage(for: .normal), for: .normal)
-    threadCountStepper.setIncrementImage(
-      threadCountStepper.incrementImage(for: .normal), for: .normal)
-    // Setup initial stepper value and its label.
-    threadCountStepper.value = Double(Constants.defaultThreadCount)
-    threadCountLabel.text = Constants.defaultThreadCount.description
-
-    // Setup segmented controller's color.
-    delegatesControl.setTitleTextAttributes(
-      [NSAttributedString.Key.foregroundColor: UIColor.lightGray],
-      for: .normal)
-    delegatesControl.setTitleTextAttributes(
-      [NSAttributedString.Key.foregroundColor: UIColor.black],
-      for: .selected)
-    // Remove existing segments to initialize it with `Delegates` entries.
-    delegatesControl.removeAllSegments()
-    Delegates.allCases.forEach { delegate in
-      delegatesControl.insertSegment(
-        withTitle: delegate.description,
-        at: delegate.rawValue,
-        animated: false)
-    }
-    delegatesControl.selectedSegmentIndex = 0*/
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -145,36 +105,6 @@ class ViewController: UIViewController {
     overlayViewFrame = overlayView.frame
     previewViewFrame = previewView.frame
   }
-
-  // MARK: Button Actions
-  /*@IBAction func didChangeThreadCount(_ sender: UIStepper) {
-    let changedCount = Int(sender.value)
-    if threadCountLabel.text == changedCount.description {
-      return
-    }
-
-    do {
-      modelDataHandler = try ModelDataHandler(threadCount: changedCount, delegate: delegate)
-    } catch let error {
-      fatalError(error.localizedDescription)
-    }
-    threadCount = changedCount
-    threadCountLabel.text = changedCount.description
-    os_log("Thread count is changed to: %d", threadCount)
-  }*/
-
-  /*@IBAction func didChangeDelegate(_ sender: UISegmentedControl) {
-    guard let changedDelegate = Delegates(rawValue: delegatesControl.selectedSegmentIndex) else {
-      fatalError("Unexpected value from delegates segemented controller.")
-    }
-    do {
-      modelDataHandler = try ModelDataHandler(threadCount: threadCount, delegate: changedDelegate)
-    } catch let error {
-      fatalError(error.localizedDescription)
-    }
-    delegate = changedDelegate
-    os_log("Delegate is changed to: %s", delegate.description)
-  }*/
 
   @IBAction func didTapResumeButton(_ sender: Any) {
     cameraCapture.resumeInterruptedSession { complete in
@@ -194,10 +124,12 @@ class ViewController: UIViewController {
       //print(pastAngles)
       // If data is currently being recorded stop the session by setting recording data to false
       recordingData = false
+  
       // Save the maximum angle found in the session if there was one
       if maxAngle > 0.0 {
         let entry = ROMEntry(date: Date(), angle: maxAngle)
         testROMEntry.append(entry)
+        saveAngle(angle: maxAngle)
       }
       //print(pastAngles)
     } else {
@@ -214,6 +146,14 @@ class ViewController: UIViewController {
         return
     }
   }
+  
+  func saveAngle(angle: CGFloat) {
+    //database.collection("Harvey Physiotherapy").addDocument(data: ["First Name" : "John", "Second Name":"Allen", "Range of Motion":angle])
+    // Create a reference to the database
+    let database = Firestore.firestore()
+    database.collection("/\(practioner)/Database/Users").addDocument(data: ["First Name" : firstName, "Second Name":lastName, "Range of Motion":angle])
+    
+  }
 
   func presentUnableToResumeSessionAlert() {
     let alert = UIAlertController(
@@ -227,6 +167,8 @@ class ViewController: UIViewController {
   }
 }
 
+
+
 // MARK: - CameraFeedManagerDelegate Methods
 extension ViewController: CameraFeedManagerDelegate {
   func cameraFeedManager(_ manager: CameraFeedManager, didOutput pixelBuffer: CVPixelBuffer) {
@@ -235,7 +177,7 @@ extension ViewController: CameraFeedManagerDelegate {
 
   // MARK: Session Handling Alerts
   func cameraFeedManagerDidEncounterSessionRunTimeError(_ manager: CameraFeedManager) {
-    // Handles session run time error by updating the UI and providing a button if session can be
+    // Handles session run time error by updating the UI and providing a button if session angle: <#CGFloat#>can be
     // manually resumed.
     self.resumeButton.isHidden = false
   }
@@ -299,8 +241,7 @@ extension ViewController: CameraFeedManagerDelegate {
     let modelInputRange = overlayViewFrame.applying(
       previewViewFrame.size.transformKeepAspect(toFitIn: pixelBuffer.size))
 
-    // Run PoseNet model.
-    // MARK: Model Run Here?
+    // Run PoseNet model
     guard
       let (result, times) = self.modelDataHandler?.runPoseNet(
         on: pixelBuffer,
@@ -341,8 +282,6 @@ extension ViewController: CameraFeedManagerDelegate {
 // MARK: - TableViewDelegate, TableViewDataSource Methods
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
-    //print("#Sections:")
-    //print(InferenceSections.allCases.count)
     return InferenceSections.allCases.count
   }
 
@@ -350,9 +289,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     guard let section = InferenceSections(rawValue: section) else {
       return 0
     }
-    //print("Section:")
-    //print(section)
-    //print(section.subcaseCount)
     return section.subcaseCount
   }
 
@@ -379,18 +315,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     case .HighScore:
         fieldName = section.description
         info = String(format: "%.3f", highScore) // data.score vs angle
-    /*
-    case .Time:
-      guard let row = ProcessingTimes(rawValue: indexPath.row) else {
-        return cell
-      }
-      var time: Double
-      switch row {
-      case .InferenceTime:
-        time = data.times.inference
-      }
-      fieldName = row.description
-      info = String(format: "%.2fms", time) */
     }
 
     cell.fieldNameLabel.text = fieldName

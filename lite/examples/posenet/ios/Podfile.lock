@@ -324,13 +324,13 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (1.2.12)
-  - TensorFlowLiteC (0.0.1-nightly.20210416):
-    - TensorFlowLiteC/Core (= 0.0.1-nightly.20210416)
-  - TensorFlowLiteC/Core (0.0.1-nightly.20210416)
-  - TensorFlowLiteSwift (0.0.1-nightly.20210416):
-    - TensorFlowLiteSwift/Core (= 0.0.1-nightly.20210416)
-  - TensorFlowLiteSwift/Core (0.0.1-nightly.20210416):
-    - TensorFlowLiteC (= 0.0.1-nightly.20210416)
+  - TensorFlowLiteC (0.0.1-nightly.20210419):
+    - TensorFlowLiteC/Core (= 0.0.1-nightly.20210419)
+  - TensorFlowLiteC/Core (0.0.1-nightly.20210419)
+  - TensorFlowLiteSwift (0.0.1-nightly.20210419):
+    - TensorFlowLiteSwift/Core (= 0.0.1-nightly.20210419)
+  - TensorFlowLiteSwift/Core (0.0.1-nightly.20210419):
+    - TensorFlowLiteC (= 0.0.1-nightly.20210419)
 
 DEPENDENCIES:
   - Charts
@@ -378,8 +378,8 @@ SPEC CHECKSUMS:
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
-  TensorFlowLiteC: 28837c40931baa50affa56f5b4fb7a4cada34b1b
-  TensorFlowLiteSwift: 8a6cfbcb0e77a37fadf1e7f94f863de9406eb641
+  TensorFlowLiteC: 63c89d0f3ad4919bca28a6c833444db6321be826
+  TensorFlowLiteSwift: 5d67dce0b89f5ec21386249ad8652aaf59954b78
 
 PODFILE CHECKSUM: f170ed1330d91e00d2f0e5139992c8eec2feb73b
 
