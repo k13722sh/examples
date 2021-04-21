@@ -151,7 +151,9 @@ class ViewController: UIViewController {
     //database.collection("Harvey Physiotherapy").addDocument(data: ["First Name" : "John", "Second Name":"Allen", "Range of Motion":angle])
     // Create a reference to the database
     let database = Firestore.firestore()
-    database.collection("/\(practioner)/Database/Users").addDocument(data: ["First Name" : firstName, "Second Name":lastName, "Range of Motion":angle])
+    //database.collection("/\(practioner)/Database/Users").addDocument(data: ["First Name" : firstName, "Second Name":lastName, "Range of Motion":angle])
+    
+    database.collection("/\(practioner)/Database/Users").document("\(firstName) \(lastName)").setData(["Maximum Angle":angle])
     
   }
 
