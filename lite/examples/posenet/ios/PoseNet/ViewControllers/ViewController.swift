@@ -152,14 +152,13 @@ class ViewController: UIViewController {
     // Create a reference to the database
     let database = Firestore.firestore()
 
-    // Get today's date and create a formatter so that it can be converted to a string.
+    // Get today's date to record when the angle was measured
     let today = Date()
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
 
-    // Add the max angle achieved on the current date to the database. If the client has used the app before this will update an existing document, otherwise a new one will be created
-    database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury) Progress").setData([formatter.string(from: today) : angle], merge: true)
     
+    // Add the max angle achieved on the current date to the database. If the client has used the app before this will update an existing document, otherwise a new one will be created
+    
+    /*
     let entryData: [String : Any] = [
        "Array" : [["Date": today,"Angle": angle], ["Date": today,"Angle": angle]]
     ]
@@ -173,29 +172,22 @@ class ViewController: UIViewController {
     }
     
     //database.collection("testit").document("Injuries").updateData(["regions": FieldValue.arrayUnion(["Date": today,"Angle":angle])])
+    database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury) Progress").setData(entryData) { err in
+      if let err = err {
+        print("Error writing document: \(err)")
+      } else {
+        print("Document successfully written!")
+      }
+    }*/
     
-    // This will still create the array if it doesn not exist already
-    database.collection("testit").document("Injuries").updateData(["regions": FieldValue.arrayUnion([["Date": today,"Angle": angle]])]) { err in
+    // Add the maximum angle achieved in the session to the database, along with the date. If the collection / document / array exists the entry otherwise they are all created.
+    database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury) Progress").updateData(["Progress": FieldValue.arrayUnion([["Date": today,"Angle": angle]])]) { err in
       if let err = err {
         print("Error writing document: \(err)")
       } else {
         print("Document successfully written!")
       }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
   }
 
   func presentUnableToResumeSessionAlert() {
