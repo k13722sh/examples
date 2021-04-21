@@ -23,6 +23,7 @@ class ViewController: UIViewController {
   let practioner = "Shawford House"
   let firstName = "Terry"
   let lastName = "Cruise"
+  let injury = "Right Shoulder"
   
   // MARK: Storyboards Connections
   @IBOutlet weak var previewView: PreviewView!
@@ -148,13 +149,16 @@ class ViewController: UIViewController {
   }
   
   func saveAngle(angle: CGFloat) {
-    //database.collection("Harvey Physiotherapy").addDocument(data: ["First Name" : "John", "Second Name":"Allen", "Range of Motion":angle])
     // Create a reference to the database
     let database = Firestore.firestore()
-    //database.collection("/\(practioner)/Database/Users").addDocument(data: ["First Name" : firstName, "Second Name":lastName, "Range of Motion":angle])
-    
-    database.collection("/\(practioner)/Database/Users").document("\(firstName) \(lastName)").setData(["Maximum Angle":angle])
-    
+
+    // Get today's date and create a formatter so that it can be converted to a string.
+    let today = Date()
+    let formatter = DateFormatter()
+    formatter.dateStyle = .short
+
+    // Add the max angle achieved on the current date to the database. If the client has used the app before this will update an existing document, otherwise a new one will be created
+    database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury) Progress").setData([formatter.string(from: today) : angle], merge: true)
   }
 
   func presentUnableToResumeSessionAlert() {
