@@ -10,21 +10,21 @@ import UIKit
 
 class ProgressViewController: UIViewController, ChartViewDelegate {
 
-    var lineChart = LineChartView()
+    var progressChart = LineChartView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        view.backgroundColor = .black
         title = "Progress"
-        lineChart.delegate = self
+        progressChart.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         // Set frame and centre for the progress chart and add to the view
-        lineChart.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.width)
-        lineChart.center = view.center
-        view.addSubview(lineChart)
+        progressChart.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.width)
+        progressChart.center = view.center
+        view.addSubview(progressChart)
         // Create an array of ChartEntryData and by using the date of the first ROMEntry
         // calculate the width of the chart. Use the width to adjust the other entries so that they fit while using a for loop to add the user entries
         var entries = [ChartDataEntry]()
@@ -39,17 +39,7 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
         let set = LineChartDataSet(entries: entries)
         set.colors = ChartColorTemplates.material()
         let data = LineChartData(dataSet: set)
-        lineChart.data = data
+        progressChart.data = data
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
