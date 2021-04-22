@@ -32,7 +32,8 @@ class ViewController: UIViewController {
   @IBOutlet weak var cameraUnavailableLabel: UILabel!
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var startStopButton: UIButton!
-
+  @IBOutlet weak var colinearLabel: UILabel!
+    
   // MARK: ModelDataHandler traits
   var threadCount: Int = Constants.defaultThreadCount
   var delegate: Delegates = Constants.defaultDelegate
@@ -57,6 +58,8 @@ class ViewController: UIViewController {
   // MARK: View Handling Methods
   override func viewDidLoad() {
     super.viewDidLoad()
+    colinearLabel.isHidden = true
+    getData()
     
     do {
       modelDataHandler = try ModelDataHandler()
@@ -122,17 +125,13 @@ class ViewController: UIViewController {
   @IBAction func didStartStopSession() {
     //print(recordingData)
     if recordingData == true {
-      //print(pastAngles)
       // If data is currently being recorded stop the session by setting recording data to false
       recordingData = false
   
       // Save the maximum angle found in the session if there was one
       if maxAngle > 0.0 {
-        let entry = ROMEntry(date: Date(), angle: maxAngle)
-        testROMEntry.append(entry)
-        saveAngle(angle: maxAngle)
+        saveData(angle: maxAngle)
       }
-      //print(pastAngles)
     } else {
       // If not currently recording data begin recording data
       recordingData = true
@@ -148,12 +147,13 @@ class ViewController: UIViewController {
     }
   }
   
-  func saveAngle(angle: CGFloat) {
+  func saveData(angle: CGFloat) {
     // Create a reference to the database
     let database = Firestore.firestore()
 
     // Get today's date to record when the angle was measured
     let today = Date()
+    //let newEntry = Entry(Date: today, Angle: angle)
     
     // Add the maximum angle achieved in the session to the database, along with the date. If the collection / document / array exists the entry otherwise they are all created.
     database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury)").updateData(["Progress": FieldValue.arrayUnion([["Date": today,"Angle": angle]])]) { err in
@@ -161,34 +161,44 @@ class ViewController: UIViewController {
         print("Error writing document: \(err)")
       } else {
         print("Document successfully written!")
+        // Update the progress report stored in client data
+        self.getData()
       }
     }
+  } //saveData()
+  
+  func getData() {
+    // Establish the database connection
+    let database = Firestore.firestore()
+    
+    // Store the document reference. Document reference generated using customer information
+    let progressRef = database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury)")
+    
+    // Initialise a report to store the return value
+    //var clientData = Report(Progress: [Entry(Date: Date(), Angle: 0.0)])
+    //var clientData = Report(Progress: nil)
+    
+    // Get the document and store in the document snapshot using a Result to determine success or failure.
+    progressRef.getDocument { (document, error) in
+      let result = Result {
+        try document?.data(as: Report.self)
+      }
+      // Depending on the value given by result either initalise a report value if success or print an error report
+      switch result {
+      case .success(let report):
+        if let report = report {
+            print("report: \(report)")
+            clientData = report
+        } else {
+            // If the document doesn't exist the report value will be nil, likewise if the document is empty the report value will also be nil
+            print("There is no document or the document is empty")
+        }
+      case .failure(let error):
+        print("Failed with error: \(error)")
+      }
+    }
+  } // getData()
 
-    
-    // Add the max angle achieved on the current date to the database. If the client has used the app before this will update an existing document, otherwise a new one will be created
-    
-    /*
-    let entryData: [String : Any] = [
-       "Array" : [["Date": today,"Angle": angle], ["Date": today,"Angle": angle]]
-    ]
-    
-    database.collection("testit").document("Injuries").setData(entryData, merge: true) { err in
-      if let err = err {
-        print("Error writing document: \(err)")
-      } else {
-        print("Document successfully written!")
-      }
-    }
-    
-    //database.collection("testit").document("Injuries").updateData(["regions": FieldValue.arrayUnion(["Date": today,"Angle":angle])])
-    database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury)").setData(entryData) { err in
-      if let err = err {
-        print("Error writing document: \(err)")
-      } else {
-        print("Document successfully written!")
-      }
-    }*/
-  }
 
   func presentUnableToResumeSessionAlert() {
     let alert = UIAlertController(

@@ -65,7 +65,7 @@
                                         </connections>
                                     </button>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Unavailable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xja-Am-Oc5">
-                                        <rect key="frame" x="112" y="330" width="190" height="26.5"/>
+                                        <rect key="frame" x="-163" y="330" width="740" height="26.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -76,8 +76,20 @@
                                     </view>
                                     <view opaque="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="FLM-9o-o4W" customClass="OverlayView" customModule="PoseNet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="163" width="414" height="414"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You need to keep your arm straight" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slv-sK-CvW">
+                                                <rect key="frame" x="20" y="304" width="374" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" systemColor="systemRedColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="slv-sK-CvW" secondAttribute="trailing" constant="20" id="19e-Gn-HiQ"/>
                                             <constraint firstAttribute="width" secondItem="FLM-9o-o4W" secondAttribute="height" multiplier="1:1" id="1T9-Bs-Jec"/>
+                                            <constraint firstAttribute="bottom" secondItem="slv-sK-CvW" secondAttribute="bottom" constant="89" id="9aI-jz-wLn"/>
+                                            <constraint firstItem="slv-sK-CvW" firstAttribute="leading" secondItem="FLM-9o-o4W" secondAttribute="leading" constant="20" id="ldF-Ah-Xlm"/>
+                                            <constraint firstAttribute="trailing" secondItem="slv-sK-CvW" secondAttribute="trailing" constant="20" id="p0P-Y7-3ue"/>
                                         </constraints>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                     </view>
@@ -190,6 +202,7 @@
                                     <constraint firstItem="FLM-9o-o4W" firstAttribute="leading" secondItem="aEU-Ov-crs" secondAttribute="leading" id="23L-Hb-zus"/>
                                     <constraint firstItem="nFg-A5-Dew" firstAttribute="leading" secondItem="aEU-Ov-crs" secondAttribute="leading" id="2aq-VQ-8jy"/>
                                     <constraint firstItem="FLM-9o-o4W" firstAttribute="width" secondItem="aEU-Ov-crs" secondAttribute="width" priority="750" id="94P-51-fMI"/>
+                                    <constraint firstItem="slv-sK-CvW" firstAttribute="width" secondItem="xja-Am-Oc5" secondAttribute="width" multiplier="0.505263" id="96Z-CL-KUw"/>
                                     <constraint firstItem="FLM-9o-o4W" firstAttribute="top" secondItem="tWv-pt-h17" secondAttribute="bottom" constant="74" id="F5W-hG-uNn"/>
                                     <constraint firstItem="tWv-pt-h17" firstAttribute="trailing" secondItem="FLM-9o-o4W" secondAttribute="trailing" id="KDo-uW-Xtk"/>
                                     <constraint firstItem="tWv-pt-h17" firstAttribute="leading" secondItem="FLM-9o-o4W" secondAttribute="leading" id="Smh-vj-hVM"/>
@@ -220,6 +233,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black" translucent="NO"/>
                     <connections>
                         <outlet property="cameraUnavailableLabel" destination="xja-Am-Oc5" id="g9Q-Mh-1ct"/>
+                        <outlet property="colinearLabel" destination="slv-sK-CvW" id="nbE-rj-HQL"/>
                         <outlet property="overlayView" destination="FLM-9o-o4W" id="06u-Ci-QDR"/>
                         <outlet property="previewView" destination="aEU-Ov-crs" id="NMN-in-8FS"/>
                         <outlet property="resumeButton" destination="JeV-bW-Ogb" id="Y7c-x9-3t3"/>
@@ -252,6 +266,9 @@
     <resources>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

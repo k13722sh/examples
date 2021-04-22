@@ -23,7 +23,9 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
   let injury = "Right Shoulder"
     
   override func viewDidLoad() {
+    // Call the superclass
     super.viewDidLoad()
+    // Set VC properties
     view.backgroundColor = .black
     title = "Progress"
     progressChart.delegate = self
@@ -32,21 +34,13 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
   @IBAction func testButtonPressed(_ sender: Any) {
     // Establish the database connection
     let database = Firestore.firestore()
-    /*
-    // My Code
-    // Store a reference to the document containing the patients progress
-    let progressRef = database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury)")
-    // Get the document and print it if successful else print the error
-    // If there is no document at progressRef this returns false
-    progressRef.getDocument { (document, error) in
-      if let document = document, document.exists {
-        let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-        print("Document data: \(dataDescription)")
-      } else {
-        print("Document does not exist")
-      }
-    }
-    */
+    
+    print(clientData)
+    let aDate = clientData.Progress[0].Date
+    let noOfDates = clientData.Progress.count
+    print(noOfDates)
+    print(aDate)
+    
     // TEST CODE - SETting a report
     let today = Date()
     let angle: CGFloat = 73.6
@@ -89,7 +83,7 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
             let test2 = report.Progress
             let testSize = test2.count
             print("Printing Test...")
-            print("\(test2) Size:\(testSize) First Element:\(test1)")
+            //print("\(test2) Size:\(testSize) First Element:\(String(describing: test1))")
         } else {
             // A nil value was successfully initialized from the DocumentSnapshot,
             // or the DocumentSnapshot was nil.
@@ -99,7 +93,7 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
         // A report value could not be initialized from the DocumentSnapshot.
         print("Error decoding report: \(error)")
     }
-}
+    }
     
   }
     
@@ -109,15 +103,20 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
     progressChart.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height:self.view.frame.size.width)
     progressChart.center = view.center
     view.addSubview(progressChart)
+    
+    // Unwrap the progress array from clientData and store in a variable
+    let progressArray = clientData.Progress
+    print("Progress Array is filled with:\(progressArray)")
     // Create an array of ChartEntryData and by using the date of the first ROMEntry
     // calculate the width of the chart. Use the width to adjust the other entries so that they fit while using a for loop to add the user entries
     var entries = [ChartDataEntry]()
-    let firstEntry = testROMEntry[0].date.timeIntervalSinceReferenceDate
-    let dateToday = Date().timeIntervalSinceReferenceDate
-    let xWidth = dateToday - firstEntry
-    for x in 0..<testROMEntry.count {
-        let adjustedDate = testROMEntry[x].date.timeIntervalSinceReferenceDate - xWidth
-        entries.append(ChartDataEntry(x: Double(adjustedDate), y: Double(testROMEntry[x].angle)))
+    //let oneMonth: Double = 2592000
+    //let firstEntry = progressArray[0].Date.timeIntervalSinceReferenceDate
+    //let dateToday = Date().timeIntervalSinceReferenceDate
+    //let xWidth = dateToday - (oneMonth * 6)
+    for x in 0..<progressArray.count {
+        //let adjustedDate = progressArray[x].Date.timeIntervalSinceReferenceDate - xWidth
+        entries.append(ChartDataEntry(x: Double(progressArray[x].Date.timeIntervalSinceReferenceDate), y: Double(progressArray[x].Angle)))
     }
     // Add the data to the chart and make changes to the appearance.
     let set = LineChartDataSet(entries: entries)
@@ -126,11 +125,7 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
     progressChart.data = data
   }
   
-  func getData() {
-    // Get the data from the database
-    
-  }
-
+  
 }
 
   public struct Entry: Codable {
@@ -144,7 +139,7 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
   }
 
   public struct Report: Codable {
-    let Progress: [Entry]
+    var Progress: [Entry]
 
     enum CodingKeys: String, CodingKey {
         case Progress

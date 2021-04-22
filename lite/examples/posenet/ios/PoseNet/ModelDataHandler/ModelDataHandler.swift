@@ -306,7 +306,7 @@ class ModelDataHandler {
             maxAngle = result.angle
             //print("The maximum angle is:")
             //print(maxAngle)
-          }
+          } 
 
         }
         
@@ -384,6 +384,8 @@ var highScore: Float = 0.0
 var recordingData: Bool = false
 //var pastAngles: [CGFloat] = [10, 20, 30, 40, 50]
 var testROMEntry = [ROMEntry]()
+var emptyEntry = Entry(Date: Date(), Angle: 0.0)
+var clientData = Report(Progress: [emptyEntry])
 //var angle: CGFloat = 0.0
 //var angleTangent: CGFloat = 0.0
 //var dy: CGFloat = 0.0
