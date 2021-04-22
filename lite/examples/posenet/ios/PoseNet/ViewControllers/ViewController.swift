@@ -58,7 +58,6 @@ class ViewController: UIViewController {
   // MARK: View Handling Methods
   override func viewDidLoad() {
     super.viewDidLoad()
-    colinearLabel.isHidden = true
     getData()
     
     do {
@@ -70,28 +69,6 @@ class ViewController: UIViewController {
     cameraCapture.delegate = self
     tableView.delegate = self
     tableView.dataSource = self
-    
-    // Initialise an array of ROMEntry (date, angle) values for testing
-    var dateInSeconds = Double(620672532)
-    for x in 1..<5  {
-      // Set the date of the measurement
-      let dateOfMeasurement = Date(timeIntervalSinceReferenceDate: dateInSeconds)
-      // Create arbitrary angle value for filling array
-      let rom: CGFloat = 10.0 * CGFloat(x)
-      // Create a ROMEntry and add that value to testROMEntry
-      let entry = ROMEntry(date: dateOfMeasurement, angle: rom)
-      testROMEntry.append(entry)
-      // Update value of dateInSeconds so next iteration of the loop creates an entry for a month later
-      dateInSeconds = dateInSeconds + (4 * 604800)
-    }
-    
-    // Create a DateFormatter toprinnt out the values of the dates (check the code is working)
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    let romArraySize = (testROMEntry.count)
-    for x in 0..<romArraySize {
-      print(formatter.string(from: testROMEntry[x].date), "\t", testROMEntry[x].angle)
-    }
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -156,7 +133,7 @@ class ViewController: UIViewController {
     //let newEntry = Entry(Date: today, Angle: angle)
     
     // Add the maximum angle achieved in the session to the database, along with the date. If the collection / document / array exists the entry otherwise they are all created.
-    database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury)").updateData(["Progress": FieldValue.arrayUnion([["Date": today,"Angle": angle]])]) { err in
+    database.collection("/\(user.practice)/Database/Users/\(user.firstName) \(user.surname)/Injuries").document("\(user.injury)").updateData(["Progress": FieldValue.arrayUnion([["Date": today,"Angle": angle]])]) { err in
       if let err = err {
         print("Error writing document: \(err)")
       } else {
@@ -172,7 +149,7 @@ class ViewController: UIViewController {
     let database = Firestore.firestore()
     
     // Store the document reference. Document reference generated using customer information
-    let progressRef = database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury)")
+    let progressRef = database.collection("/\(user.practice)/Database/Users/\(user.firstName) \(user.surname)/Injuries").document("\(user.injury)")
     
     // Initialise a report to store the return value
     //var clientData = Report(Progress: [Entry(Date: Date(), Angle: 0.0)])
@@ -381,40 +358,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
   }*/
 
 }
-
-extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        print("\(info)")
-        
-        if let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? NSURL {
-            print("Ta-da:")
-            print(videoURL)
-            //imageView.image = previewImageFromVideo(url: videoURL)!
-            //imageView.contentMode = .scaleAspectFit
-            
-            // Add code to use video input
-            isSourceVideo = true
-            cameraCapture.stopSession()
-            let video = AVPlayer(url: (videoURL as URL))
-            // I want to add AVPlayer to the previewView layer (i.e where the camera feed plays)
-            //previewView.previewLayer = AVPlayerLayer(player: video)
-            //layer.frame = view.bounds
-            //view.layer.insertSublayer(layer, at: 1)
-            
-            video.play()
-    
-            picker.dismiss(animated: true, completion: nil)
-
-        } else {
-            picker.dismiss(animated: true, completion: nil)
-        }
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-    }
-}
-
 
 // MARK: - Private enums
 /// UI coinstraint values

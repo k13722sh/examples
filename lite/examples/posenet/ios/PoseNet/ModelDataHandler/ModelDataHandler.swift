@@ -247,7 +247,7 @@ class ModelDataHandler {
 
     // MARK: Transform key point position and make lines
     // Make `Result` from `keypointPosition'. Each point is adjusted to `ViewSize` to be drawn.
-    var result = InfResult(dots: [], lines: [], score: totalScore, angle: 0)
+    var result = InfResult(dots: [], lines: [], score: totalScore, angle: 0, valid: false)
     var bodyPartToDotMap = [BodyPart: CGPoint]()
     for (index, part) in BodyPart.allCases.enumerated() {
       let position = CGPoint(
@@ -301,19 +301,15 @@ class ModelDataHandler {
         
         // If the angle calculated is greater than maxAngle then update it
         if result.angle > maxAngle {
-          print("New max angle")
-          if colinear(shoulder: rShoulder, elbow: rElbow, wrist: rWrist, maxBend: 45.0) {
+          //print("New max angle")
+          if colinear(shoulder: rShoulder, elbow: rElbow, wrist: rWrist, maxBend: 10.0) {
             maxAngle = result.angle
-            //print("The maximum angle is:")
-            //print(maxAngle)
-          } 
-
+          }
         }
         
         // See highest score in a session
         if totalScore > highScore {
             highScore = totalScore
-            //print(highScore)
         }
       }
     } // if recordingData
@@ -321,17 +317,14 @@ class ModelDataHandler {
   } // postProcess
   
   private func colinear(shoulder:CGPoint, elbow:CGPoint, wrist:CGPoint, maxBend:CGFloat) -> Bool {
-    //print("Colinear called")
     let a = CGPointDistance(from: shoulder, to: elbow)
     let bSqrd = CGPointDistanceSquared(from: shoulder, to: wrist)
     let c = CGPointDistance(from: elbow, to: wrist)
     // The angle we are checking is opposite the side from shoulder to wrist
     let cosB = ((a*a)+(c*c)-(bSqrd)) / (2*a*c)
     // Find the inverse and convert to degrees
-    let eAngle = acos(cosB)*(180 / .pi)
+    let eAngle = 180 - (acos(cosB)*(180 / .pi))
     if eAngle < maxBend  {
-      //print("Angle:")
-      //print(eAngle)
       return true
     }
     return false
@@ -383,7 +376,8 @@ let minimumScore: Float = 0.0
 var highScore: Float = 0.0
 var recordingData: Bool = false
 //var pastAngles: [CGFloat] = [10, 20, 30, 40, 50]
-var testROMEntry = [ROMEntry]()
+//var testROMEntry = [ROMEntry]()
+var user = User(firstName: "s",surname: "s",practice: "s",injury: "s")
 var emptyEntry = Entry(Date: Date(), Angle: 0.0)
 var clientData = Report(Progress: [emptyEntry])
 //var angle: CGFloat = 0.0
@@ -419,14 +413,23 @@ struct InfResult {
   var lines: [Line]
   var score: Float
   var angle: CGFloat
+  var valid: Bool
+}
+
+public struct User {
+  var firstName: String
+  var surname: String
+  var practice: String
+  var injury: String
 }
 
 // ROMEntry (ROM = Range of Movement) struct, stores the range of movement in the joint and the
 // date on which that entry was recorded
+/*
 struct ROMEntry {
   var date: Date
   var angle: CGFloat
-}
+}*/
 
 enum BodyPart: String, CaseIterable {
   case NOSE = "nose"

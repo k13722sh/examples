@@ -110,12 +110,7 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
     // Create an array of ChartEntryData and by using the date of the first ROMEntry
     // calculate the width of the chart. Use the width to adjust the other entries so that they fit while using a for loop to add the user entries
     var entries = [ChartDataEntry]()
-    //let oneMonth: Double = 2592000
-    //let firstEntry = progressArray[0].Date.timeIntervalSinceReferenceDate
-    //let dateToday = Date().timeIntervalSinceReferenceDate
-    //let xWidth = dateToday - (oneMonth * 6)
     for x in 0..<progressArray.count {
-        //let adjustedDate = progressArray[x].Date.timeIntervalSinceReferenceDate - xWidth
         entries.append(ChartDataEntry(x: Double(progressArray[x].Date.timeIntervalSinceReferenceDate), y: Double(progressArray[x].Angle)))
     }
     // Add the data to the chart and make changes to the appearance.
@@ -123,6 +118,8 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
     set.colors = ChartColorTemplates.material()
     let data = LineChartData(dataSet: set)
     progressChart.data = data
+    let romIncrease = progressArray[progressArray.count-1].Angle - progressArray[0].Angle
+    print(romIncrease)
   }
   
   

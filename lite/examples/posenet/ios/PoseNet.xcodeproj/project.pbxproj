@@ -25,6 +25,7 @@
 		84B67CF62326338400A11A08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84B67CF52326338400A11A08 /* Assets.xcassets */; };
 		84D6576D2387BB7E0048171E /* CGSizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D6576C2387BB7E0048171E /* CGSizeExtension.swift */; };
 		84FCF5922387BD7900663812 /* tfl_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 84FCF5912387BD7900663812 /* tfl_logo.png */; };
+		E20637F5263200FF00A17CDB /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20637F4263200FF00A17CDB /* FormViewController.swift */; };
 		E21FA648262AFF2600E52652 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E21FA647262AFF2600E52652 /* GoogleService-Info.plist */; };
 		E2286ABB261F5A3400B3754A /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2286ABA261F5A3400B3754A /* ProgressViewController.swift */; };
 		E2DF660E25ECF6FA00777328 /* RightShoulderAlfie.MOV in Resources */ = {isa = PBXBuildFile; fileRef = E2DF660D25ECF6FA00777328 /* RightShoulderAlfie.MOV */; };
@@ -54,6 +55,7 @@
 		84D6576C2387BB7E0048171E /* CGSizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtension.swift; sourceTree = "<group>"; };
 		84FCF5912387BD7900663812 /* tfl_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tfl_logo.png; path = Assets.xcassets/tfl_logo.png; sourceTree = "<group>"; };
 		9EB104050968651D405840BC /* Pods-PoseNet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoseNet.debug.xcconfig"; path = "Target Support Files/Pods-PoseNet/Pods-PoseNet.debug.xcconfig"; sourceTree = "<group>"; };
+		E20637F4263200FF00A17CDB /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		E21FA647262AFF2600E52652 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E2286ABA261F5A3400B3754A /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		E2DF660D25ECF6FA00777328 /* RightShoulderAlfie.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = RightShoulderAlfie.MOV; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				84B67CF02326338300A11A08 /* ViewController.swift */,
+				E20637F4263200FF00A17CDB /* FormViewController.swift */,
 				E2286ABA261F5A3400B3754A /* ProgressViewController.swift */,
 			);
 			path = ViewControllers;
@@ -358,6 +361,7 @@
 				8474FEC92341D36E00377D34 /* PreviewView.swift in Sources */,
 				84952CB5236186BE0052C104 /* CVPixelBufferExtension.swift in Sources */,
 				840ECB20238BAA2300C7D88A /* InfoCell.swift in Sources */,
+				E20637F5263200FF00A17CDB /* FormViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
