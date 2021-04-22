@@ -121,7 +121,7 @@ class ModelDataHandler {
   ///   - to: Size of view to render the result.
   /// - Returns: Result of the inference and the times consumed in every steps.
   func runPoseNet(on pixelbuffer: CVPixelBuffer, from source: CGRect, to dest: CGSize)
-    -> (Result, Times)?
+    -> (InfResult, Times)?
   {
     // Start times of each process.
     let preprocessingStartTime: Date
@@ -198,7 +198,7 @@ class ModelDataHandler {
   /// - Parameters:
   ///   - to: Size of view to be displaied.
   /// - Returns: Postprocessed `Result`. `nil` if it can not be processed.
-  private func postprocess(to viewSize: CGSize) -> Result? {
+  private func postprocess(to viewSize: CGSize) -> InfResult? {
     // MARK: Formats output tensors
     // Convert `Tensor` to `FlatArray`. As PoseNet is not quantized, convert them to Float type
     // `FlatArray`.
@@ -247,7 +247,7 @@ class ModelDataHandler {
 
     // MARK: Transform key point position and make lines
     // Make `Result` from `keypointPosition'. Each point is adjusted to `ViewSize` to be drawn.
-    var result = Result(dots: [], lines: [], score: totalScore, angle: 0)
+    var result = InfResult(dots: [], lines: [], score: totalScore, angle: 0)
     var bodyPartToDotMap = [BodyPart: CGPoint]()
     for (index, part) in BodyPart.allCases.enumerated() {
       let position = CGPoint(
@@ -412,7 +412,7 @@ struct Times {
   var postprocessing: Double
 }
 
-struct Result {
+struct InfResult {
   var dots: [CGPoint]
   var lines: [Line]
   var score: Float

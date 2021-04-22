@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2900D704825DA6AB92E60A45 /* Pods_PoseNet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A943D9854B7AF4CF67DF5D8B /* Pods_PoseNet.framework */; };
+		0191F428EE6A553AA991F579 /* Pods_PoseNet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 075D21D8702E5E92FB7398A0 /* Pods_PoseNet.framework */; };
 		8402440123D9834600704ABD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8402440023D9834600704ABD /* README.md */; };
 		840ECB20238BAA2300C7D88A /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840ECB1F238BAA2300C7D88A /* InfoCell.swift */; };
 		840EDCFD2341DDD30017ED42 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 840EDCFB2341DDD30017ED42 /* Launch Screen.storyboard */; };
@@ -31,8 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E0639E533E72A8A0B924C0A /* Pods-PoseNet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoseNet.release.xcconfig"; path = "Target Support Files/Pods-PoseNet/Pods-PoseNet.release.xcconfig"; sourceTree = "<group>"; };
-		830E6AE9C541B2D9F0092DD1 /* Pods-PoseNet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoseNet.debug.xcconfig"; path = "Target Support Files/Pods-PoseNet/Pods-PoseNet.debug.xcconfig"; sourceTree = "<group>"; };
+		06EB1B65994D8B642E86AECD /* Pods-PoseNet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoseNet.release.xcconfig"; path = "Target Support Files/Pods-PoseNet/Pods-PoseNet.release.xcconfig"; sourceTree = "<group>"; };
+		075D21D8702E5E92FB7398A0 /* Pods_PoseNet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PoseNet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8402440023D9834600704ABD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		840ECB1F238BAA2300C7D88A /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		840EDCFC2341DDD30017ED42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 		84B67CFA2326338400A11A08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84D6576C2387BB7E0048171E /* CGSizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtension.swift; sourceTree = "<group>"; };
 		84FCF5912387BD7900663812 /* tfl_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tfl_logo.png; path = Assets.xcassets/tfl_logo.png; sourceTree = "<group>"; };
-		A943D9854B7AF4CF67DF5D8B /* Pods_PoseNet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PoseNet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EB104050968651D405840BC /* Pods-PoseNet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PoseNet.debug.xcconfig"; path = "Target Support Files/Pods-PoseNet/Pods-PoseNet.debug.xcconfig"; sourceTree = "<group>"; };
 		E21FA647262AFF2600E52652 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E2286ABA261F5A3400B3754A /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		E2DF660D25ECF6FA00777328 /* RightShoulderAlfie.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = RightShoulderAlfie.MOV; sourceTree = "<group>"; };
@@ -64,13 +64,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2900D704825DA6AB92E60A45 /* Pods_PoseNet.framework in Frameworks */,
+				0191F428EE6A553AA991F579 /* Pods_PoseNet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B5FAC15E77FB70E25192A4B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				075D21D8702E5E92FB7398A0 /* Pods_PoseNet.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		840ECB1E238BAA0D00C7D88A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,7 +155,7 @@
 				84B67CED2326338300A11A08 /* PoseNet */,
 				84B67CEC2326338300A11A08 /* Products */,
 				B4DFDCC28443B641BC36251D /* Pods */,
-				EF7C60EC8704AE0A5886704E /* Frameworks */,
+				6B5FAC15E77FB70E25192A4B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -193,18 +201,10 @@
 		B4DFDCC28443B641BC36251D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				830E6AE9C541B2D9F0092DD1 /* Pods-PoseNet.debug.xcconfig */,
-				0E0639E533E72A8A0B924C0A /* Pods-PoseNet.release.xcconfig */,
+				9EB104050968651D405840BC /* Pods-PoseNet.debug.xcconfig */,
+				06EB1B65994D8B642E86AECD /* Pods-PoseNet.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		EF7C60EC8704AE0A5886704E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A943D9854B7AF4CF67DF5D8B /* Pods_PoseNet.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,12 +214,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84B67CFD2326338400A11A08 /* Build configuration list for PBXNativeTarget "PoseNet" */;
 			buildPhases = (
-				E1EE186614B146F978313575 /* [CP] Check Pods Manifest.lock */,
+				19EC66DD7C5566C4BE776DAB /* [CP] Check Pods Manifest.lock */,
 				84884298237010B90043FC4C /* Download TensorFlow Lite model */,
 				84B67CE72326338300A11A08 /* Sources */,
 				84B67CE82326338300A11A08 /* Frameworks */,
 				84B67CE92326338300A11A08 /* Resources */,
-				F19C44A256CD0A199C61B539 /* [CP] Embed Pods Frameworks */,
+				70537242BDD829A59CCC99BA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -282,25 +282,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		84884298237010B90043FC4C /* Download TensorFlow Lite model */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Download TensorFlow Lite model";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "\"$SRCROOT/RunScripts/download_models.sh\"\n";
-		};
-		E1EE186614B146F978313575 /* [CP] Check Pods Manifest.lock */ = {
+		19EC66DD7C5566C4BE776DAB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -322,7 +304,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F19C44A256CD0A199C61B539 /* [CP] Embed Pods Frameworks */ = {
+		70537242BDD829A59CCC99BA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -338,6 +320,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PoseNet/Pods-PoseNet-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		84884298237010B90043FC4C /* Download TensorFlow Lite model */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Download TensorFlow Lite model";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "\"$SRCROOT/RunScripts/download_models.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -501,7 +501,7 @@
 		};
 		84B67CFE2326338400A11A08 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 830E6AE9C541B2D9F0092DD1 /* Pods-PoseNet.debug.xcconfig */;
+			baseConfigurationReference = 9EB104050968651D405840BC /* Pods-PoseNet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -522,7 +522,7 @@
 		};
 		84B67CFF2326338400A11A08 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E0639E533E72A8A0B924C0A /* Pods-PoseNet.release.xcconfig */;
+			baseConfigurationReference = 06EB1B65994D8B642E86AECD /* Pods-PoseNet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

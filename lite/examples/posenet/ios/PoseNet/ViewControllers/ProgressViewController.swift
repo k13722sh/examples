@@ -7,6 +7,7 @@
 //
 import Charts
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 import UIKit
 
 class ProgressViewController: UIViewController, ChartViewDelegate {
@@ -29,17 +30,77 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
   }
     
   @IBAction func testButtonPressed(_ sender: Any) {
-    print("Hello World")
+    // Establish the database connection
     let database = Firestore.firestore()
-    let progressRef = database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury) Progress")
+    /*
+    // My Code
+    // Store a reference to the document containing the patients progress
+    let progressRef = database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury)")
+    // Get the document and print it if successful else print the error
+    // If there is no document at progressRef this returns false
     progressRef.getDocument { (document, error) in
-    if let document = document, document.exists {
+      if let document = document, document.exists {
         let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
         print("Document data: \(dataDescription)")
-    } else {
+      } else {
         print("Document does not exist")
+      }
+    }
+    */
+    // TEST CODE - SETting a report
+    let today = Date()
+    let angle: CGFloat = 73.6
+    let rom = Entry(Date: today, Angle: angle)
+    let report = Report(Progress: [rom, rom, rom])
+    let progressRef = database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury)")
+
+    do {
+        try progressRef.setData(from: report)
+    } catch let error {
+    print("Error writing report to Firestore: \(error)")
+    }
+    
+    // TEST CODE - GETting a report
+    //let docRef = database.collection("cities").document("LA")
+
+    progressRef.getDocument { (document, error) in
+    // Construct a Result type to encapsulate deserialization errors or
+    // successful deserialization. Note that if there is no error thrown
+    // the value may still be `nil`, indicating a successful deserialization
+    // of a value that does not exist.
+    //
+    // There are thus three cases to handle, which Swift lets us describe
+    // nicely with built-in Result types:
+    //
+    //      Result
+    //        /\
+    //   Error  Optional<City>
+    //               /\
+    //            Nil  City
+    let result = Result {
+      try document?.data(as: Report.self)
+    }
+    switch result {
+    case .success(let report):
+        if let report = report {
+            // A report value was successfully initialized from the DocumentSnapshot.
+            print("report: \(report)")
+            let test1 = report.Progress[0]
+            let test2 = report.Progress
+            let testSize = test2.count
+            print("Printing Test...")
+            print("\(test2) Size:\(testSize) First Element:\(test1)")
+        } else {
+            // A nil value was successfully initialized from the DocumentSnapshot,
+            // or the DocumentSnapshot was nil.
+            print("Document does not exist")
+        }
+    case .failure(let error):
+        // A report value could not be initialized from the DocumentSnapshot.
+        print("Error decoding report: \(error)")
     }
 }
+    
   }
     
   override func viewDidLayoutSubviews() {
@@ -64,5 +125,29 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
     let data = LineChartData(dataSet: set)
     progressChart.data = data
   }
+  
+  func getData() {
+    // Get the data from the database
+    
+  }
 
 }
+
+  public struct Entry: Codable {
+    let Date: Date
+    let Angle: CGFloat
+    
+    enum CodingKeys: String, CodingKey {
+      case Date
+      case Angle
+    }
+  }
+
+  public struct Report: Codable {
+    let Progress: [Entry]
+
+    enum CodingKeys: String, CodingKey {
+        case Progress
+    }
+}
+

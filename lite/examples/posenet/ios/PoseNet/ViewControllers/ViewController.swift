@@ -156,7 +156,7 @@ class ViewController: UIViewController {
     let today = Date()
     
     // Add the maximum angle achieved in the session to the database, along with the date. If the collection / document / array exists the entry otherwise they are all created.
-    database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury) Progress").updateData(["Progress": FieldValue.arrayUnion([["Date": today,"Angle": angle]])]) { err in
+    database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury)").updateData(["Progress": FieldValue.arrayUnion([["Date": today,"Angle": angle]])]) { err in
       if let err = err {
         print("Error writing document: \(err)")
       } else {
@@ -181,7 +181,7 @@ class ViewController: UIViewController {
     }
     
     //database.collection("testit").document("Injuries").updateData(["regions": FieldValue.arrayUnion(["Date": today,"Angle":angle])])
-    database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury) Progress").setData(entryData) { err in
+    database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury)").setData(entryData) { err in
       if let err = err {
         print("Error writing document: \(err)")
       } else {
@@ -302,7 +302,7 @@ extension ViewController: CameraFeedManagerDelegate {
     }
   }
 
-  func drawResult(of result: Result) {
+  func drawResult(of result: InfResult) {
     self.overlayView.dots = result.dots
     self.overlayView.lines = result.lines
     self.overlayView.setNeedsDisplay()
