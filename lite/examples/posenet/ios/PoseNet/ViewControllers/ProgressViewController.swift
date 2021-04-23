@@ -13,6 +13,7 @@ import UIKit
 class ProgressViewController: UIViewController, ChartViewDelegate {
 
   @IBOutlet weak var improvementLabel: UILabel!
+  @IBOutlet weak var entryLabel: UILabel!
   @IBOutlet weak var timeFrameSegmentedControl: UISegmentedControl!
   
   var timeFrame = 0.0
@@ -33,6 +34,7 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
     view.backgroundColor = .black
     title = "Progress"
     progressChart.delegate = self
+    entryLabel.isHidden = true
   }
     @IBAction func indexChanged(_ sender: Any) {
     switch timeFrameSegmentedControl.selectedSegmentIndex
@@ -56,6 +58,7 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
         break
     }
     // Refresh view
+    entryLabel.isHidden = true
     viewDidLayoutSubviews()
     }
     
@@ -88,13 +91,32 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
     set.colors = ChartColorTemplates.material()
     let data = LineChartData(dataSet: set)
     progressChart.data = data
+    // Alter xAxis
+    progressChart.xAxis.labelPosition = .bottom
+    progressChart.xAxis.labelRotationAngle = 60
+    //progressChart.xAxis.drawLabelsEnabled = false
+    progressChart.legend.enabled = false
+    progressChart.rightAxis.drawLabelsEnabled = false
+    progressChart.xAxis.valueFormatter = axisValueFormatter()
+    progressChart.xAxis.axisMaxLabels = 4
+    
     var romIncrease = progressArray[progressArray.count-1].Angle - progressArray[firstEntry].Angle
     romIncrease.round()
     improvementLabel.text = "\(timeFrameString), your range of motion has improved by \(romIncrease) degrees"
   }
   
-  
+  func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+      let date = Date(timeIntervalSinceReferenceDate: entry.x)
+      let formatter = DateFormatter()
+      formatter.dateStyle = .short
+      var angle: Double = entry.y
+      angle.round()
+      entryLabel.text = "Angle: \(angle) Date: \(formatter.string(from: date))"
+      entryLabel.isHidden = false
+    }
 }
+
+
 
   public struct Entry: Codable {
     let Date: Date
@@ -114,3 +136,13 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
     }
 }
 
+class axisValueFormatter: IAxisValueFormatter {
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+      let date = Date(timeIntervalSinceReferenceDate: value)
+      let formatter = DateFormatter()
+      formatter.dateStyle = .short
+      return formatter.string(from: date)
+    }
+    
+    let timeFrame: Double = 0.0
+}

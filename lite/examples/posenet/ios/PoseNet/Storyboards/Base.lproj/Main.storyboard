@@ -40,6 +40,15 @@
                                     <action selector="indexChanged:" destination="6fR-xD-oGJ" eventType="valueChanged" id="N0m-MG-5Gx"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZg-Ap-SSa">
+                                <rect key="frame" x="20" y="64" width="374" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Bdq-bt-OZt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BqK-Zc-kbK"/>
                         <constraints>
@@ -47,10 +56,14 @@
                             <constraint firstItem="Jit-LX-k6k" firstAttribute="centerX" secondItem="vvl-4j-Oye" secondAttribute="centerX" id="Aei-5U-mix"/>
                             <constraint firstItem="Jit-LX-k6k" firstAttribute="trailing" secondItem="axu-f4-lnn" secondAttribute="trailingMargin" id="Wo5-gx-7cI"/>
                             <constraint firstItem="Jit-LX-k6k" firstAttribute="top" secondItem="vvl-4j-Oye" secondAttribute="bottom" constant="20" id="XXw-zn-Km6"/>
+                            <constraint firstItem="RZg-Ap-SSa" firstAttribute="top" secondItem="BqK-Zc-kbK" secondAttribute="top" constant="20" id="YyX-0K-63S"/>
+                            <constraint firstItem="RZg-Ap-SSa" firstAttribute="leading" secondItem="BqK-Zc-kbK" secondAttribute="leading" constant="20" id="jlz-A1-7gw"/>
+                            <constraint firstItem="BqK-Zc-kbK" firstAttribute="trailing" secondItem="RZg-Ap-SSa" secondAttribute="trailing" constant="20" id="net-Y3-8C1"/>
                             <constraint firstItem="BqK-Zc-kbK" firstAttribute="bottom" secondItem="Jit-LX-k6k" secondAttribute="bottom" constant="20" id="pNy-qF-F4P"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="entryLabel" destination="RZg-Ap-SSa" id="igI-zm-rRJ"/>
                         <outlet property="improvementLabel" destination="Jit-LX-k6k" id="19y-Ls-AKG"/>
                         <outlet property="timeFrameSegmentedControl" destination="vvl-4j-Oye" id="7MB-hk-fZa"/>
                     </connections>
