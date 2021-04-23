@@ -12,7 +12,11 @@ import UIKit
 
 class ProgressViewController: UIViewController, ChartViewDelegate {
 
-  @IBOutlet weak var testButton: UIButton!
+  @IBOutlet weak var improvementLabel: UILabel!
+  @IBOutlet weak var timeFrameSegmentedControl: UISegmentedControl!
+  
+  var timeFrame = 0.0
+  var timeFrameString = "Since your injury"
     
   var progressChart = LineChartView()
     
@@ -30,73 +34,30 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
     title = "Progress"
     progressChart.delegate = self
   }
-   /*
-  @IBAction func testButtonPressed(_ sender: Any) {
-  
-    // Establish the database connection
-    let database = Firestore.firestore()
-    
-    print(clientData)
-    let aDate = clientData.Progress[0].Date
-    let noOfDates = clientData.Progress.count
-    print(noOfDates)
-    print(aDate)
-    
-    // TEST CODE - SETting a report
-    let today = Date()
-    let angle: CGFloat = 73.6
-    let rom = Entry(Date: today, Angle: angle)
-    let report = Report(Progress: [rom, rom, rom])
-    let progressRef = database.collection("/\(practioner)/Database/Users/\(firstName) \(lastName)/Injuries").document("\(injury)")
-
-    do {
-        try progressRef.setData(from: report)
-    } catch let error {
-    print("Error writing report to Firestore: \(error)")
+    @IBAction func indexChanged(_ sender: Any) {
+    switch timeFrameSegmentedControl.selectedSegmentIndex
+    {
+    case 0:
+      timeFrame = 0
+      timeFrameString = "Since your injury"
+    case 1:
+      // 3 Months
+      timeFrame = Date().timeIntervalSinceReferenceDate - (2630000*3)
+      timeFrameString = "In the last three months"
+    case 2:
+      // 1 Month
+      timeFrame = Date().timeIntervalSinceReferenceDate - 2630000
+      timeFrameString = "In the last month"
+    case 3:
+      // 2 Weeks
+      timeFrame = Date().timeIntervalSinceReferenceDate - (604800*2)
+      timeFrameString = "In the last two weeks"
+    default:
+        break
     }
-    
-    // TEST CODE - GETting a report
-    //let docRef = database.collection("cities").document("LA")
-
-    progressRef.getDocument { (document, error) in
-    // Construct a Result type to encapsulate deserialization errors or
-    // successful deserialization. Note that if there is no error thrown
-    // the value may still be `nil`, indicating a successful deserialization
-    // of a value that does not exist.
-    //
-    // There are thus three cases to handle, which Swift lets us describe
-    // nicely with built-in Result types:
-    //
-    //      Result
-    //        /\
-    //   Error  Optional<City>
-    //               /\
-    //            Nil  City
-    let result = Result {
-      try document?.data(as: Report.self)
+    // Refresh view
+    viewDidLayoutSubviews()
     }
-    switch result {
-    case .success(let report):
-        if let report = report {
-            // A report value was successfully initialized from the DocumentSnapshot.
-            print("report: \(report)")
-            let test1 = report.Progress[0]
-            let test2 = report.Progress
-            let testSize = test2.count
-            print("Printing Test...")
-            //print("\(test2) Size:\(testSize) First Element:\(String(describing: test1))")
-        } else {
-            // A nil value was successfully initialized from the DocumentSnapshot,
-            // or the DocumentSnapshot was nil.
-            print("Document does not exist")
-        }
-    case .failure(let error):
-        // A report value could not be initialized from the DocumentSnapshot.
-        print("Error decoding report: \(error)")
-    }
-    }
-    
-  }*/
     
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
@@ -111,16 +72,25 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
     // Create an array of ChartEntryData and by using the date of the first ROMEntry
     // calculate the width of the chart. Use the width to adjust the other entries so that they fit while using a for loop to add the user entries
     var entries = [ChartDataEntry]()
+    var firstEntrySet = false
+    var firstEntry = 0
     for x in 0..<progressArray.count {
+      if progressArray[x].Date.timeIntervalSinceReferenceDate > timeFrame {
+        if !(firstEntrySet) {
+          firstEntry = x
+          firstEntrySet = true
+        }
         entries.append(ChartDataEntry(x: Double(progressArray[x].Date.timeIntervalSinceReferenceDate), y: Double(progressArray[x].Angle)))
+      }
     }
     // Add the data to the chart and make changes to the appearance.
     let set = LineChartDataSet(entries: entries)
     set.colors = ChartColorTemplates.material()
     let data = LineChartData(dataSet: set)
     progressChart.data = data
-    let romIncrease = progressArray[progressArray.count-1].Angle - progressArray[0].Angle
-    print(romIncrease)
+    var romIncrease = progressArray[progressArray.count-1].Angle - progressArray[firstEntry].Angle
+    romIncrease.round()
+    improvementLabel.text = "\(timeFrameString), your range of motion has improved by \(romIncrease) degrees"
   }
   
   

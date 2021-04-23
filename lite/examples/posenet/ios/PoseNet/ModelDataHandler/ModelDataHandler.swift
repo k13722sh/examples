@@ -11,6 +11,9 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+//
+// Sean Harris authored the User struct, as well as the functions colinear()
+// and angleAtShoulder() along with their calls from postProcess()
 
 import Accelerate
 import CoreImage
@@ -281,34 +284,15 @@ class ModelDataHandler {
       // If statement to calculate the angle. To ensure accurate results the angle is only
       // calculated if the score is above a certain threshold.
       if totalScore > minimumScore {
-        // Load the coordinates of the right elbow, shoulder and wrist from the model result
-        let rElbow = result.dots[8]
-        let rShoulder = result.dots[6]
-        let rWrist = result.dots[10]
-        /*
-        // Calculate the change in y and x between the shoulder point and the elbow point
-        let dy = rShoulder.y - rElbow.y
-        let dx = rShoulder.x - rElbow.x
-    
-        // If dy is -ve then the arm is pointing down to the right else it is up to the right and 90 degrees needs to be added on to the final answer
-        if (dy < 0) {
-            let angleTangent = dx / dy
-            result.angle = atan(abs(angleTangent)) * (180 / .pi)
-        } else {
-            let angleTangent = dy / dx
-            result.angle = atan(abs(angleTangent)) * (180 / .pi) + 90
-        } // if-else
-        */
         result.angle = angleAtShoulder(injury: user.injury, points: result.dots)
         // If the angle calculated is greater than maxAngle then update it
         if result.angle > maxAngle {
           //print("New max angle")
-          if colinear(shoulder: rShoulder, elbow: rElbow, wrist: rWrist, maxBend: 10.0) {
+            if colinear(injury: user.injury, points: result.dots, maxBend: 10.0) {
             maxAngle = result.angle
           }
         }
-        
-        // See highest score in a session
+        // See highest score in the session
         if totalScore > highScore {
             highScore = totalScore
         }
@@ -348,7 +332,23 @@ class ModelDataHandler {
     return angle
   }
   
-  private func colinear(shoulder:CGPoint, elbow:CGPoint, wrist:CGPoint, maxBend:CGFloat) -> Bool {
+  private func colinear(injury: String ,points:[CGPoint], maxBend:CGFloat) -> Bool {
+    var shoulder: CGPoint = CGPoint(x: 0.0, y: 0.0)
+    var elbow: CGPoint = CGPoint(x: 0.0, y: 0.0)
+    var wrist: CGPoint = CGPoint(x: 0.0, y: 0.0)
+    if injury == "Right Shoulder" {
+      // Load the coordinates of the right elbow and shoulder
+      shoulder = points[6]
+      elbow = points[8]
+      wrist = points[10]
+    } else if injury == "Left Shoulder" {
+      // Load the coordinates of the left elbow and shoulder
+      shoulder = points[5]
+      elbow = points[7]
+      wrist = points[9]
+    } else {
+      print("Error reading injury string")
+    }
     let a = CGPointDistance(from: shoulder, to: elbow)
     let bSqrd = CGPointDistanceSquared(from: shoulder, to: wrist)
     let c = CGPointDistance(from: elbow, to: wrist)
@@ -404,7 +404,7 @@ var maxAngle: CGFloat = 0.0
 let minimumScore: Float = 0.0
 var highScore: Float = 0.0
 var recordingData: Bool = false
-var user = User(firstName: "s",surname: "s",practice: "s",injury: "s")
+var user = User(firstName: "First Name",surname: "Surname",practice: "A GP",injury: "Right Shoulder")
 var emptyEntry = Entry(Date: Date(), Angle: 0.0)
 var clientData = Report(Progress: [emptyEntry])
 
@@ -431,7 +431,6 @@ struct InfResult {
   var lines: [Line]
   var score: Float
   var angle: CGFloat
-  //var valid: Bool
 }
 
 public struct User {

@@ -324,16 +324,16 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     switch section {
     case .Score:
         fieldName = section.description
-        info = String(format: "%.3f", data.score) // data.score vs angle
+        info = String(format: "%.3f", data.score)
     case .Angle:
         fieldName = section.description
-        info = String(format: "%.3f", data.angle) // data.score vs angle
+        info = String(format: "%.3f", data.angle)
     case .MaxAngle:
         fieldName = section.description
-        info = String(format: "%.3f", maxAngle) // data.score vs angle
+        info = String(format: "%.3f", maxAngle)
     case .HighScore:
         fieldName = section.description
-        info = String(format: "%.3f", highScore) // data.score vs angle
+        info = String(format: "%.3f", highScore)
     }
 
     cell.fieldNameLabel.text = fieldName
@@ -341,18 +341,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
     return cell
   }
-
- /* func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    guard let section = InferenceSections(rawValue: indexPath.section) else {
-      return 0
-    }
-
-    var height = Traits.normalCellHeight
-    if indexPath.row == section.subcaseCount - 1 {
-      height = Traits.separatorCellHeight + Traits.bottomSpacing
-    }
-    return height
-  }*/
 
 }
 
@@ -388,10 +376,6 @@ fileprivate enum InferenceSections: Int, CaseIterable {
         return "MaxAngle"
     case .HighScore:
         return "Highest Score"
-    /*
-    case .Time:
-        return "Processing Time"
-    */
     }
   }
 
@@ -405,10 +389,6 @@ fileprivate enum InferenceSections: Int, CaseIterable {
         return 1
     case .HighScore:
         return 1
-    /*
-    case .Time:
-        return ProcessingTimes.allCases.count
-    */
     }
   }
 }
