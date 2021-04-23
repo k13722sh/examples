@@ -247,7 +247,7 @@ class ModelDataHandler {
 
     // MARK: Transform key point position and make lines
     // Make `Result` from `keypointPosition'. Each point is adjusted to `ViewSize` to be drawn.
-    var result = InfResult(dots: [], lines: [], score: totalScore, angle: 0, valid: false)
+    var result = InfResult(dots: [], lines: [], score: totalScore, angle: 0)
     var bodyPartToDotMap = [BodyPart: CGPoint]()
     for (index, part) in BodyPart.allCases.enumerated() {
       let position = CGPoint(
@@ -277,7 +277,7 @@ class ModelDataHandler {
     }
     
     if recordingData == true {
-      // MARK: Method stub to return an angle (My Code)
+      // MARK: (My Code)
       // If statement to calculate the angle. To ensure accurate results the angle is only
       // calculated if the score is above a certain threshold.
       if totalScore > minimumScore {
@@ -285,7 +285,7 @@ class ModelDataHandler {
         let rElbow = result.dots[8]
         let rShoulder = result.dots[6]
         let rWrist = result.dots[10]
-    
+        /*
         // Calculate the change in y and x between the shoulder point and the elbow point
         let dy = rShoulder.y - rElbow.y
         let dx = rShoulder.x - rElbow.x
@@ -298,7 +298,8 @@ class ModelDataHandler {
             let angleTangent = dy / dx
             result.angle = atan(abs(angleTangent)) * (180 / .pi) + 90
         } // if-else
-        
+        */
+        result.angle = angleAtShoulder(injury: user.injury, points: result.dots)
         // If the angle calculated is greater than maxAngle then update it
         if result.angle > maxAngle {
           //print("New max angle")
@@ -316,6 +317,37 @@ class ModelDataHandler {
     return result
   } // postProcess
   
+  private func angleAtShoulder(injury: String, points: [CGPoint]) -> CGFloat {
+    var shoulder: CGPoint = CGPoint(x: 0.0, y: 0.0)
+    var elbow: CGPoint = CGPoint(x: 0.0, y: 0.0)
+    if injury == "Right Shoulder" {
+      // Load the coordinates of the right elbow and shoulder
+      elbow = points[8]
+      shoulder = points[6]
+    } else if injury == "Left Shoulder" {
+      // Load the coordinates of the left elbow and shoulder
+      elbow = points[7]
+      shoulder = points[5]
+    } else {
+      print("Error reading injury string")
+    }
+    
+    // Calculate the change in y and x between the shoulder point and the elbow point
+    let dy = shoulder.y - elbow.y
+    let dx = shoulder.x - elbow.x
+    
+    // If dy is -ve then the arm is pointing down to the right else it is up to the right and 90 degrees needs to be added on to the final answer
+    var angle: CGFloat = 0.0
+    if (dy < 0) {
+      let angleTangent = dx / dy
+      angle = atan(abs(angleTangent)) * (180 / .pi)
+    } else {
+      let angleTangent = dy / dx
+      angle = atan(abs(angleTangent)) * (180 / .pi) + 90
+    } // if-else
+    return angle
+  }
+  
   private func colinear(shoulder:CGPoint, elbow:CGPoint, wrist:CGPoint, maxBend:CGFloat) -> Bool {
     let a = CGPointDistance(from: shoulder, to: elbow)
     let bSqrd = CGPointDistanceSquared(from: shoulder, to: wrist)
@@ -330,11 +362,11 @@ class ModelDataHandler {
     return false
   }
   
-  func CGPointDistanceSquared(from: CGPoint, to: CGPoint) -> CGFloat {
+  private func CGPointDistanceSquared(from: CGPoint, to: CGPoint) -> CGFloat {
     return (from.x - to.x) * (from.x - to.x) + (from.y - to.y) * (from.y - to.y)
   }
 
-  func CGPointDistance(from: CGPoint, to: CGPoint) -> CGFloat {
+  private func CGPointDistance(from: CGPoint, to: CGPoint) -> CGFloat {
     return sqrt(CGPointDistanceSquared(from: from, to: to))
   }
 
@@ -369,26 +401,12 @@ class ModelDataHandler {
 
 // MARK: My Variables
 var maxAngle: CGFloat = 0.0
-//var printOut: Int = 1
-// Minimum score to render the result.
 let minimumScore: Float = 0.0
-//let maximumBend: CGFloat = 45.0
 var highScore: Float = 0.0
 var recordingData: Bool = false
-//var pastAngles: [CGFloat] = [10, 20, 30, 40, 50]
-//var testROMEntry = [ROMEntry]()
 var user = User(firstName: "s",surname: "s",practice: "s",injury: "s")
 var emptyEntry = Entry(Date: Date(), Angle: 0.0)
 var clientData = Report(Progress: [emptyEntry])
-//var angle: CGFloat = 0.0
-//var angleTangent: CGFloat = 0.0
-//var dy: CGFloat = 0.0
-//var dx: CGFloat = 0.0
-//var cSqrd: CGFloat = 0.0
-//var hypotenuse: CGFloat = 0.0
-//var rElbow: CGPoint = CGPoint.init()
-//var rShoulder: CGPoint = CGPoint.init()
-//var rWrist: CGPoint = CGPoint.init()
 
 // MARK: - Data types for inference result
 struct KeyPoint {
@@ -413,7 +431,7 @@ struct InfResult {
   var lines: [Line]
   var score: Float
   var angle: CGFloat
-  var valid: Bool
+  //var valid: Bool
 }
 
 public struct User {
@@ -422,14 +440,6 @@ public struct User {
   var practice: String
   var injury: String
 }
-
-// ROMEntry (ROM = Range of Movement) struct, stores the range of movement in the joint and the
-// date on which that entry was recorded
-/*
-struct ROMEntry {
-  var date: Date
-  var angle: CGFloat
-}*/
 
 enum BodyPart: String, CaseIterable {
   case NOSE = "nose"
@@ -470,17 +480,17 @@ enum BodyPart: String, CaseIterable {
 // MARK: - Delegates Enum
 enum Delegates: Int, CaseIterable {
   case CPU
-  //case Metal
-  //case CoreML
+  case Metal
+  case CoreML
 
   var description: String {
     switch self {
     case .CPU:
       return "CPU"
-   /* case .Metal:
+    case .Metal:
       return "GPU"
     case .CoreML:
-      return "NPU"*/
+      return "NPU"
     }
   }
 }

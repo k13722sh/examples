@@ -140,8 +140,19 @@
                                     </view>
                                     <view opaque="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="FLM-9o-o4W" customClass="OverlayView" customModule="PoseNet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="163" width="414" height="414"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You need to keep your arm straight" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASH-Tb-hX7">
+                                                <rect key="frame" x="20" y="363" width="374" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" systemColor="systemRedColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="FLM-9o-o4W" secondAttribute="height" multiplier="1:1" id="1T9-Bs-Jec"/>
+                                            <constraint firstAttribute="bottom" secondItem="ASH-Tb-hX7" secondAttribute="bottom" constant="30" id="BpT-i1-rhS"/>
+                                            <constraint firstItem="ASH-Tb-hX7" firstAttribute="leading" secondItem="FLM-9o-o4W" secondAttribute="leading" constant="20" id="VXD-mm-Lfi"/>
+                                            <constraint firstAttribute="trailing" secondItem="ASH-Tb-hX7" secondAttribute="trailing" constant="20" id="d5A-Eh-QLC"/>
                                         </constraints>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                     </view>
@@ -284,6 +295,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black" translucent="NO"/>
                     <connections>
                         <outlet property="cameraUnavailableLabel" destination="xja-Am-Oc5" id="g9Q-Mh-1ct"/>
+                        <outlet property="colinearLabel" destination="ASH-Tb-hX7" id="2xA-Jp-ikR"/>
                         <outlet property="overlayView" destination="FLM-9o-o4W" id="06u-Ci-QDR"/>
                         <outlet property="previewView" destination="aEU-Ov-crs" id="NMN-in-8FS"/>
                         <outlet property="resumeButton" destination="JeV-bW-Ogb" id="Y7c-x9-3t3"/>
@@ -310,12 +322,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TgB-wu-SaV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="266.66666666666669" y="137.94642857142856"/>
+            <point key="canvasLocation" x="1177" y="-587"/>
         </scene>
     </scenes>
     <resources>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

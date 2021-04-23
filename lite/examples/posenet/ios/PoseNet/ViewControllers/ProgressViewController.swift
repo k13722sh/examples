@@ -30,8 +30,9 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
     title = "Progress"
     progressChart.delegate = self
   }
-    
+   /*
   @IBAction func testButtonPressed(_ sender: Any) {
+  
     // Establish the database connection
     let database = Firestore.firestore()
     
@@ -95,7 +96,7 @@ class ProgressViewController: UIViewController, ChartViewDelegate {
     }
     }
     
-  }
+  }*/
     
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()

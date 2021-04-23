@@ -59,6 +59,7 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     getData()
+    colinearLabel.isHidden = true
     
     do {
       modelDataHandler = try ModelDataHandler()
@@ -104,11 +105,13 @@ class ViewController: UIViewController {
     if recordingData == true {
       // If data is currently being recorded stop the session by setting recording data to false
       recordingData = false
-  
+      // Hide colinear label
+      colinearLabel.isHidden = true
       // Save the maximum angle found in the session if there was one
       if maxAngle > 0.0 {
         saveData(angle: maxAngle)
       }
+      maxAngle = 0.0
     } else {
       // If not currently recording data begin recording data
       recordingData = true
@@ -130,7 +133,6 @@ class ViewController: UIViewController {
 
     // Get today's date to record when the angle was measured
     let today = Date()
-    //let newEntry = Entry(Date: today, Angle: angle)
     
     // Add the maximum angle achieved in the session to the database, along with the date. If the collection / document / array exists the entry otherwise they are all created.
     database.collection("/\(user.practice)/Database/Users/\(user.firstName) \(user.surname)/Injuries").document("\(user.injury)").updateData(["Progress": FieldValue.arrayUnion([["Date": today,"Angle": angle]])]) { err in
@@ -150,10 +152,6 @@ class ViewController: UIViewController {
     
     // Store the document reference. Document reference generated using customer information
     let progressRef = database.collection("/\(user.practice)/Database/Users/\(user.firstName) \(user.surname)/Injuries").document("\(user.injury)")
-    
-    // Initialise a report to store the return value
-    //var clientData = Report(Progress: [Entry(Date: Date(), Angle: 0.0)])
-    //var clientData = Report(Progress: nil)
     
     // Get the document and store in the document snapshot using a Result to determine success or failure.
     progressRef.getDocument { (document, error) in
@@ -276,7 +274,6 @@ extension ViewController: CameraFeedManagerDelegate {
 
     // Udpate `inferencedData` to render data in `tableView`.
     inferencedData = InferencedData(score: result.score, angle: result.angle, times: times)
-
     // Draw result.
     DispatchQueue.main.async {
       self.tableView.reloadData()
